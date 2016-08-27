@@ -25,8 +25,8 @@ public class RowParser {
       char arrSeparator) throws RowParserException {
     columns = cols;
     lookupTableIndex = index;
-    separator = columnSeparator;
-    arraySeparator = arrSeparator;
+    setSeparator(columnSeparator);
+    setArraySeparator(arrSeparator);
     rowTemplate = new Row(cols.length);
     timestampTemplate = new Timestamp(0);
   }
@@ -34,6 +34,30 @@ public class RowParser {
   public static RowParser newInstance() throws RowParserException {
     return new RowParser(
         null, null, DEFAULT_COLUMN_SEPARATOR, DEFAULT_ARRAY_SEPARATOR);
+  }
+
+  public static RowParser netInstance(OmnitureMetadata meta)
+      throws RowParserException {
+    return newInstance(meta, DEFAULT_COLUMN_SEPARATOR, DEFAULT_ARRAY_SEPARATOR);
+  }
+
+  public static RowParser newInstance(
+      OmnitureMetadata meta,
+      char separator,
+      char arraySeparator)
+      throws RowParserException {
+
+    try {
+      List<Column> cols = meta.getHeader().getColumns();
+      return newInstance(
+          cols.toArray(new Column[cols.size()]),
+          meta.getLookupTable().getIndex(),
+          separator,
+          arraySeparator
+      );
+    } catch (MetadataException ex) {
+      throw new RowParserException(ex);
+    }
   }
 
   public static RowParser newInstance(Column[] cols, LookupTableIndex index)
