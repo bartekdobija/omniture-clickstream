@@ -1,7 +1,9 @@
 # omniture-clickstream
-Omniture clickstream parser (alpha version)
+Omniture clickstream log parser (alpha version)
 
-Maven configuration:
+### Configuration
+
+Maven:
 
 ```xml
 <repository>
@@ -16,7 +18,7 @@ Maven configuration:
 </dependency>
 ```
 
-SBT Configuration:
+SBT:
 
 ```sbt
 
@@ -26,7 +28,7 @@ libraryDependencies += "com.github.bartekdobija" % "omniture-clickstream" % "71d
 
 ```
 
-Gradle configuration:
+Gradle:
 
 ```gradle
 repositories {
@@ -38,6 +40,20 @@ repositories {
 dependencies {
     compile 'com.github.bartekdobija:omniture-clickstream:71deaff440'
 }
+```
+
+### API
+
+Java - metadata load from the Omniture manifest file
+
+```java
+
+String localManifest = "file://omniture_manifest.txt";
+String hdfsManifest = "hdfs://hadoopnode/omniture_manifest.txt";
+String s3Manifest = "s3://my-omniture/manifest_a.txt,s3://my-omniture/manifest_b.txt";
+
+OmnitureMetadata meta = new OmnitureMetadataFactory().create(hdfsManifest);
+
 ```
 
 [![Build Status](https://travis-ci.org/bartekdobija/omniture-clickstream.svg?branch=master)](https://travis-ci.org/bartekdobija/omniture-clickstream)
