@@ -1,0 +1,18 @@
+Datafeed-Manifest-Version: 1.0
+Lookup-Files: 1
+Data-Files: 2
+Total-Records: 20
+
+Lookup-File: suiteid_2015-02-10-lookup_data.tar.gz
+MD5-Digest: 6bf7e86226a85e3edef6f57ee11c626a
+File-Size: 1997386
+
+Data-File: 01-suiteid_2015-02-10.tsv.gz
+MD5-Digest: 1845254ae07eaa9842b11cbd0186623d
+File-Size: 3164
+Record-Count: 10
+
+Data-File: 02-suiteid_2015-02-10.tsv.gz
+MD5-Digest: 1845254ae07eaa9842b11cbd0186623d
+File-Size: 3164
+Record-Count: 10
