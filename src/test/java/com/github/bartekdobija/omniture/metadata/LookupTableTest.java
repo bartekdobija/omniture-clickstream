@@ -34,6 +34,9 @@ public class LookupTableTest {
     assertTrue(header.getColumn(1).getName().equals("browser"));
     assertTrue(header.getColumn(1).getType() == ColumnType.STRING);
 
+    assertTrue(header.getColumn(159).getName().equals("language"));
+    assertTrue(header.getColumn(159).getType() == ColumnType.STRING);
+
     assertTrue(header.getColumn(193).getName().equals("os"));
     assertTrue(header.getColumn(193).getType() == ColumnType.STRING);
 
@@ -44,10 +47,13 @@ public class LookupTableTest {
     assertTrue(header.getColumn(317).getType() == ColumnType.STRING_ARRAY);
 
     assertEquals("Lynx 2.7.1", table.getGroupValue("browser","1"));
-    assertEquals("Afrikaans", table.getGroupValue("languages","2"));
-
     assertEquals("Lynx 2.7.1", index.getGroupValue("browser","1"));
-    assertEquals("Afrikaans", index.getGroupValue("languages","2"));
+
+    assertNull(index.getGroupValue("languages", "1"));
+    assertNull(table.getGroupValue("languages", "1"));
+
+    assertEquals("Not Specified", table.getGroupValue("language","1"));
+    assertEquals("Afrikaans", index.getGroupValue("language","2"));
 
     assertNull(index.getGroupValue("operating_systems", "1"));
     assertNull(table.getGroupValue("operating_systems", "1"));

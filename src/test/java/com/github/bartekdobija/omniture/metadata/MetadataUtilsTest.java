@@ -26,16 +26,17 @@ public class MetadataUtilsTest {
     LookupTable table = meta.getLookupTable();
     LookupTableIndex index = table.getIndex();
 
-    assertTrue(header.getColumn(0).getName().equals("accept_language"));
-    assertTrue(header.getColumn(0).getType() == ColumnType.STRING);
-    assertTrue(header.getColumn(1).getName().equals("browser"));
+    assertEquals("language", header.getColumn(159).getName());
+    assertTrue(header.getColumn(159).getType() == ColumnType.STRING);
+
+    assertEquals("browser", header.getColumn(1).getName());
     assertTrue(header.getColumn(1).getType() == ColumnType.STRING);
 
     assertEquals("Lynx 2.7.1", table.getGroupValue("browser","1"));
-    assertEquals("Afrikaans", table.getGroupValue("languages","2"));
+    assertEquals("Afrikaans", table.getGroupValue("language","2"));
 
     assertEquals("Lynx 2.7.1", index.getGroupValue("browser","1"));
-    assertEquals("Afrikaans", index.getGroupValue("languages","2"));
+    assertEquals("Afrikaans", index.getGroupValue("language","2"));
 
   }
 

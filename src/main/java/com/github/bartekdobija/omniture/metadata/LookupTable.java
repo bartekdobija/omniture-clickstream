@@ -22,6 +22,9 @@ public class LookupTable {
       put("operating_systems", "os");
       put("color_depth", "color");
       put("event","event_list,post_event_list");
+      put("search_engines", "search_engine");
+      put("languages","language,post_sociallanguage,sociallanguage");
+      put("javascript_version", "javascript");
     }
 
   };
