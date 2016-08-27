@@ -12,7 +12,7 @@ Maven configuration:
 <dependency>
   <groupId>com.github.bartekdobija</groupId>
   <artifactId>omniture-clickstream</artifactId>
-  <version>7678f93f20</version>
+  <version>71deaff440</version>
 </dependency>
 ```
 
@@ -22,7 +22,7 @@ SBT Configuration:
 
 resolvers += "jitpack" at "https://jitpack.io"
 
-libraryDependencies += "com.github.bartekdobija" % "omniture-clickstream" % "7678f93f20"
+libraryDependencies += "com.github.bartekdobija" % "omniture-clickstream" % "71deaff440"
 
 ```
 
@@ -36,7 +36,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.bartekdobija:omniture-clickstream:7678f93f20'
+    compile 'com.github.bartekdobija:omniture-clickstream:71deaff440'
 }
 ```
 
