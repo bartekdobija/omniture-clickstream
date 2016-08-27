@@ -53,7 +53,11 @@ String hdfsManifest = "hdfs://hadoopnode/omniture_manifest.txt";
 String s3Manifest = "s3://my-omniture/manifest_a.txt,s3://my-omniture/manifest_b.txt";
 String row = "a\tb\tc";
 
-OmnitureMetadata metadata = new OmnitureMetadataFactory().create(s3Manifest);
+OmnitureMetadata metadata = new OmnitureMetadataFactory().create(hdfsManifest);
+
+// or get a metadata list
+List<OmnitureMetadata> metadatas = new OmnitureMetadataFactory().create(s3Manifest, ",");
+
 RowParser parser = RowParser.netInstance(metadata);
 Row row = parser.parse(row);
 
