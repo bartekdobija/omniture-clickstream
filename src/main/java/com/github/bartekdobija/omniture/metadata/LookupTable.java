@@ -3,6 +3,7 @@ package com.github.bartekdobija.omniture.metadata;
 import com.github.bartekdobija.omniture.loader.DataLoader;
 import com.github.bartekdobija.omniture.metadata.utils.MetadataUtils;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class LookupTable {
@@ -14,8 +15,20 @@ public class LookupTable {
     "referrer_type.tsv", "resolution.tsv", "search_engines.tsv"
   };
 
+  public static Map<String,String> namingExceptions =
+      new HashMap<String, String>(){
+
+    {
+      put("operating_systems", "os");
+      put("color_depth", "color");
+      put("event","event_list,post_event_list");
+    }
+
+  };
+
   public static final String LOOKUP_TABLE_EOL = "\n";
   public static final String LOOKUP_TABLE_SEPARATOR = "\t";
+  public static final String EXC_SEPARATOR = ",";
   public static final String LOOKUP_FILE_EXT = ".tsv";
   private static final String EMPTY_STR = "";
 
@@ -48,18 +61,31 @@ public class LookupTable {
 
     LookupTableIndex tmp = new LookupTableIndex();
     for (Map.Entry<String, String> e : tableContent.entrySet()) {
-      String group = e.getKey().replace(LOOKUP_FILE_EXT, EMPTY_STR);
+
+      String group = withNamingException(
+          e.getKey().replace(LOOKUP_FILE_EXT, EMPTY_STR));
+
       String[] cols;
       for (String line: e.getValue().split(LOOKUP_TABLE_EOL)) {
         cols = line.split(LOOKUP_TABLE_SEPARATOR);
         if (cols.length == 2) {
-          tmp.setGroupValue(group, cols[0], cols[1]);
+          for(String exc :group.split(EXC_SEPARATOR)) {
+            tmp.setGroupValue(exc, cols[0], cols[1]);
+          }
         }
       }
     }
 
     //TODO: check if the condition is required, there's an exception thrown earlier
     if (!tmp.isEmpty()) index = tmp;
+  }
+
+  private String withNamingException(String group) {
+    String ne;
+    if(group == null || (ne = namingExceptions.get(group)) == null) {
+      return group;
+    }
+    return ne;
   }
 
   @Override

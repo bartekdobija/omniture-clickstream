@@ -11,22 +11,25 @@ import java.io.File;
 
 public class MetadataUtilsTest {
 
+  String manifestFile =
+      "file://" +
+          new File(".").getAbsolutePath() +
+          "/src/test/resources/data/suiteid_2015-12-29.txt";
+
   @Test
   public void fromExtendedManifest() throws Exception {
 
-    String pwd = "file://" + new File(".").getAbsolutePath();
-    String manifestFile = pwd + "/src/test/resources/data/suiteid_2015-12-29.txt";
     OmnitureManifest em = ManifestUtils.fromUrl(manifestFile);
-
     OmnitureMetadata meta = MetadataUtils.fromOmnitureManifest(em);
-
-    assertTrue(meta.getHeader().getColumn(0).getName().equals("accept_language"));
-    assertTrue(meta.getHeader().getColumn(0).getType() == ColumnType.STRING);
-    assertTrue(meta.getHeader().getColumn(1).getName().equals("browser"));
-    assertTrue(meta.getHeader().getColumn(1).getType() == ColumnType.STRING);
+    Header header = meta.getHeader();
 
     LookupTable table = meta.getLookupTable();
     LookupTableIndex index = table.getIndex();
+
+    assertTrue(header.getColumn(0).getName().equals("accept_language"));
+    assertTrue(header.getColumn(0).getType() == ColumnType.STRING);
+    assertTrue(header.getColumn(1).getName().equals("browser"));
+    assertTrue(header.getColumn(1).getType() == ColumnType.STRING);
 
     assertEquals("Lynx 2.7.1", table.getGroupValue("browser","1"));
     assertEquals("Afrikaans", table.getGroupValue("languages","2"));

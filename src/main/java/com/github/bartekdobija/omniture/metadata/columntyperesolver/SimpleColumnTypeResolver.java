@@ -9,7 +9,7 @@ public class SimpleColumnTypeResolver implements ColumnTypeResolver {
 
   protected Pattern _string = Pattern.compile("evar|prop");
   protected Pattern _lookedUpString =
-      Pattern.compile("browser|connection_type|color|country|language");
+      Pattern.compile("browser|connection_type|(^color$)|country|language");
   protected Pattern _lookedUpNonStandardString =
       Pattern.compile("(^os$)|search_engine");
 
@@ -17,7 +17,8 @@ public class SimpleColumnTypeResolver implements ColumnTypeResolver {
   protected Pattern _lookedUpArray =
       Pattern.compile("event_list|plugins");
   protected Pattern _int =
-      Pattern.compile("_visit|_height|_width|_visid_type|_num|(_hit$)");
+      Pattern.compile("_visit|_height|_width|_visid_type|_num|(_hit$)" +
+          "|duplicate_|c_col|hit_s");
   protected Pattern _long =
       Pattern.compile("_id|_hash|userid|_visitor|_high|_low");
 

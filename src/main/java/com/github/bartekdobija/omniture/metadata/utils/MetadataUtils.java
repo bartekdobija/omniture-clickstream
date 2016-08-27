@@ -22,6 +22,7 @@ public class MetadataUtils {
 
   private static final String SEPARATOR = "/";
   private static final int LOOKUP_FILE_ENTRY_GROUP = 1;
+  private static final int ZERO_LENGTH = 0;
 
   public static OmnitureMetadata fromOmnitureManifest(OmnitureManifest manifest)
       throws ManifestException {
@@ -69,7 +70,7 @@ public class MetadataUtils {
   }
 
   public static Map<String, String> getArchivedContent(
-      InputStream stream,   List<String> fileNames) throws MetadataException {
+      InputStream stream, List<String> fileNames) throws MetadataException {
 
     Map<String, String> result = new HashMap<>();
 
@@ -122,7 +123,7 @@ public class MetadataUtils {
         continue;
       }
 
-      path.setLength(0);
+      path.setLength(ZERO_LENGTH);
       path.append(dataDir.toString()).append(SEPARATOR).append(file);
 
       result.add(

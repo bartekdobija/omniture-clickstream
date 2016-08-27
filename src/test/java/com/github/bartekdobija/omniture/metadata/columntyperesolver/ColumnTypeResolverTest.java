@@ -143,6 +143,18 @@ public class ColumnTypeResolverTest {
     assertTrue(tested.getLookupGroup() == null);
     assertTrue(tested.getType() == ColumnType.LONG);
 
+    tested = resolver.parseName("c_color");
+
+    assertTrue(tested.getName().equals("c_color"));
+    assertTrue(tested.getLookupGroup() == null);
+    assertTrue(tested.getType() == ColumnType.INT);
+
+    tested = resolver.parseName("duplicate_purchase");
+
+    assertTrue(tested.getName().equals("duplicate_purchase"));
+    assertTrue(tested.getLookupGroup() == null);
+    assertTrue(tested.getType() == ColumnType.INT);
+
   }
 
 }
