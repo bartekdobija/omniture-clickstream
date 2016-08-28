@@ -8,6 +8,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.util.List;
 
 public class MetadataUtilsTest {
 
@@ -37,6 +38,11 @@ public class MetadataUtilsTest {
 
     assertEquals("Lynx 2.7.1", index.getGroupValue("browser","1"));
     assertEquals("Afrikaans", index.getGroupValue("language","2"));
+
+    List<DataFile> files = meta.getDataFiles();
+
+    assertTrue(files.get(0).getName().contains("resources/data/01-suite"));
+    assertTrue(files.get(1).getName().contains("resources/data/02-suite"));
 
   }
 

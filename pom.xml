@@ -67,6 +67,7 @@
             <compilerArgs>
               <arg>-verbose</arg>
               <arg>-g:none</arg>
+              <arg>-Xlint</arg>
             </compilerArgs>
           </configuration>
         </plugin>
