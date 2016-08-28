@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class RowParserTest {
+public class OmnitureRowParserTest {
 
   private static final String EMPTY_ROW = "";
   private static final String VALID_ROW =
@@ -70,7 +70,8 @@ public class RowParserTest {
     Calendar expectedTimestamp = Calendar.getInstance();
     expectedTimestamp.setTimeInMillis(1423556690 * 1000L);
 
-    RowParser parser = RowParser.newInstance(VALID_ROW_SCHEMA, lookupTable);
+    RowParser parser =
+        OmnitureRowParser.newInstance(VALID_ROW_SCHEMA, lookupTable);
 
     Row row = parser.parse(VALID_ROW);
 
@@ -92,16 +93,30 @@ public class RowParserTest {
     assertEquals(2511725138L, row.get(11));
     assertEquals(6851172488903270000L, row.get(12));
 
+    row = parser.parse(INVALID_TYPE_ROW);
+    RowParserStats stats = parser.getRowParserStats();
+
+    assertEquals(2, stats.getParsedCount());
+    assertEquals(0, stats.getEmptyRowCount());
+    assertEquals(0, stats.getExceptionCount());
+
   }
 
   @Test
   public void emptyRow() throws RowParserException {
 
     RowParser parser =
-        RowParser.newInstance(VALID_ROW_SCHEMA, new LookupTableIndex());
+        OmnitureRowParser.newInstance(VALID_ROW_SCHEMA, new LookupTableIndex());
     Row row = parser.parse(EMPTY_ROW);
 
     assertEquals(null, row);
+
+    row = parser.parse(EMPTY_ROW);
+    RowParserStats stats = parser.getRowParserStats();
+
+    assertEquals(0, stats.getParsedCount());
+    assertEquals(2, stats.getEmptyRowCount());
+    assertEquals(0, stats.getExceptionCount());
 
   }
 
@@ -113,7 +128,8 @@ public class RowParserTest {
     lookupTable.setGroupValue(TEST_GROUP_NAME, "ga", MOCKED_VALUE1);
     lookupTable.setGroupValue(TEST_GROUP_NAME, "ta", MOCKED_VALUE2);
 
-    RowParser parser = RowParser.newInstance(VALID_ROW_SCHEMA, lookupTable);
+    RowParser parser =
+        OmnitureRowParser.newInstance(VALID_ROW_SCHEMA, lookupTable);
 
     Row row = parser.parse(ALL_MISSING_ROW);
 
@@ -130,6 +146,13 @@ public class RowParserTest {
     assertEquals(null, row.get(10));
     assertEquals(null, row.get(11));
 
+    row = parser.parse(INVALID_TYPE_ROW);
+    RowParserStats stats = parser.getRowParserStats();
+
+    assertEquals(2, stats.getParsedCount());
+    assertEquals(0, stats.getEmptyRowCount());
+    assertEquals(0, stats.getExceptionCount());
+
   }
 
   @Test
@@ -140,7 +163,8 @@ public class RowParserTest {
     lookupTable.setGroupValue(TEST_GROUP_NAME, "ga", MOCKED_VALUE1);
     lookupTable.setGroupValue(TEST_GROUP_NAME, "ta", MOCKED_VALUE2);
 
-    RowParser parser = RowParser.newInstance(VALID_ROW_SCHEMA, lookupTable);
+    RowParser parser =
+        OmnitureRowParser.newInstance(VALID_ROW_SCHEMA, lookupTable);
 
     Row row = parser.parse(INVALID_TYPE_ROW);
 
@@ -155,6 +179,13 @@ public class RowParserTest {
     assertEquals(null, row.get(9));
     assertEquals(null, row.get(10));
     assertEquals(null, row.get(11));
+
+    row = parser.parse(INVALID_TYPE_ROW);
+    RowParserStats stats = parser.getRowParserStats();
+
+    assertEquals(2, stats.getParsedCount());
+    assertEquals(0, stats.getEmptyRowCount());
+    assertEquals(0, stats.getExceptionCount());
 
   }
 

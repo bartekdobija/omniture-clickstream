@@ -47,7 +47,6 @@ dependencies {
 Java - metadata load from the Omniture manifest file
 
 ```java
-
 String localManifest = "file://omniture_manifest.txt";
 String hdfsManifest = "hdfs://hadoopnode/omniture_manifest.txt";
 String s3Manifest = "s3://my-omniture/manifest_a.txt,s3://my-omniture/manifest_b.txt";
@@ -58,9 +57,8 @@ OmnitureMetadata metadata = new OmnitureMetadataFactory().create(hdfsManifest);
 // or get a metadata list
 List<OmnitureMetadata> metadatas = new OmnitureMetadataFactory().create(s3Manifest, ",");
 
-RowParser parser = RowParser.netInstance(metadata);
+RowParser parser = OmnitureRowParser.netInstance(metadata);
 Row row = parser.parse(row);
-
 ```
 
 [![Build Status](https://travis-ci.org/bartekdobija/omniture-clickstream.svg?branch=master)](https://travis-ci.org/bartekdobija/omniture-clickstream)
