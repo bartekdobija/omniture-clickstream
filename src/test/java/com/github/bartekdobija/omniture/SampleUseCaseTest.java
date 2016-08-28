@@ -9,6 +9,7 @@ import static org.junit.Assert.*;
 import com.github.bartekdobija.omniture.row.OmnitureRowParser;
 import com.github.bartekdobija.omniture.row.Row;
 import com.github.bartekdobija.omniture.row.RowParserException;
+import com.github.bartekdobija.omniture.row.RowParserStats;
 import org.junit.Test;
 
 import java.util.List;
@@ -43,6 +44,13 @@ public class SampleUseCaseTest {
     assertNotNull(row.get(0));
     assertNotNull(row.get(1));
     assertNotNull(row.get(2));
+
+    RowParserStats stats = parser.getRowParserStats();
+
+    assertEquals(1, stats.getParsedCount());
+    assertEquals(0, stats.getEmptyRowCount());
+    assertEquals(0, stats.getExceptionCount());
+
   }
 
   @Test

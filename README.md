@@ -59,6 +59,8 @@ List<OmnitureMetadata> metadatas = new OmnitureMetadataFactory().create(s3Manife
 
 RowParser parser = OmnitureRowParser.newInstance(metadata);
 Row row = parser.parse(row);
+
+RowParserStats stats = parser.getRowParserStats();
 ```
 
 [![Build Status](https://travis-ci.org/bartekdobija/omniture-clickstream.svg?branch=master)](https://travis-ci.org/bartekdobija/omniture-clickstream)
