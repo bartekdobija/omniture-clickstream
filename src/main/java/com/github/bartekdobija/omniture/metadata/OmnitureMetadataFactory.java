@@ -10,6 +10,14 @@ import java.util.List;
 
 public class OmnitureMetadataFactory {
 
+  public OmnitureMetadataFactory() {
+
+  }
+
+  public static OmnitureMetadataFactory newInstance() {
+    return new OmnitureMetadataFactory();
+  }
+
   public OmnitureMetadata create(String url)
       throws MetadataException {
     if (url == null || url.isEmpty()) {
