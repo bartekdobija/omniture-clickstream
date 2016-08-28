@@ -40,7 +40,7 @@ public class OmnitureRowParser implements RowParser {
         null, null, DEFAULT_COLUMN_SEPARATOR, DEFAULT_ARRAY_SEPARATOR);
   }
 
-  public static OmnitureRowParser netInstance(OmnitureMetadata meta)
+  public static OmnitureRowParser newInstance(OmnitureMetadata meta)
       throws RowParserException {
     return newInstance(meta, DEFAULT_COLUMN_SEPARATOR, DEFAULT_ARRAY_SEPARATOR);
   }

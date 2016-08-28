@@ -36,7 +36,7 @@ public class SampleUseCaseTest {
 
     OmnitureMetadata metadata =
         new OmnitureMetadataFactory().create(MANIFEST_FILE);
-    OmnitureRowParser parser = OmnitureRowParser.netInstance(metadata);
+    OmnitureRowParser parser = OmnitureRowParser.newInstance(metadata);
     Row row = parser.parse(ROW_STRING);
 
     assertNotNull(row);
@@ -50,8 +50,8 @@ public class SampleUseCaseTest {
     List<OmnitureMetadata> metadatas =
         new OmnitureMetadataFactory().create(MANIFEST_LIST, LIST_SEPARATOR);
 
-    OmnitureRowParser parserA = OmnitureRowParser.netInstance(metadatas.get(0));
-    OmnitureRowParser parserB = OmnitureRowParser.netInstance(metadatas.get(1));
+    OmnitureRowParser parserA = OmnitureRowParser.newInstance(metadatas.get(0));
+    OmnitureRowParser parserB = OmnitureRowParser.newInstance(metadatas.get(1));
 
     assertNotNull(parserA);
     assertNotNull(parserB);

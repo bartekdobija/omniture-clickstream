@@ -57,7 +57,7 @@ OmnitureMetadata metadata = new OmnitureMetadataFactory().create(hdfsManifest);
 // or get a metadata list
 List<OmnitureMetadata> metadatas = new OmnitureMetadataFactory().create(s3Manifest, ",");
 
-RowParser parser = OmnitureRowParser.netInstance(metadata);
+RowParser parser = OmnitureRowParser.newInstance(metadata);
 Row row = parser.parse(row);
 ```
 
