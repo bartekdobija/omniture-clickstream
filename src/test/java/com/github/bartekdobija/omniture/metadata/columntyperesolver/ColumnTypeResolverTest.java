@@ -155,6 +155,30 @@ public class ColumnTypeResolverTest {
     assertTrue(tested.getLookupGroup() == null);
     assertTrue(tested.getType() == ColumnType.INT);
 
+    tested = resolver.parseName("curr_rate");
+
+    assertTrue(tested.getName().equals("curr_rate"));
+    assertTrue(tested.getLookupGroup() == null);
+    assertTrue(tested.getType() == ColumnType.DOUBLE);
+
+    tested = resolver.parseName("page_event");
+
+    assertTrue(tested.getName().equals("page_event"));
+    assertTrue(tested.getLookupGroup() == null);
+    assertTrue(tested.getType() == ColumnType.INT);
+
+    tested = resolver.parseName("post_page_event");
+
+    assertTrue(tested.getName().equals("post_page_event"));
+    assertTrue(tested.getLookupGroup() == null);
+    assertTrue(tested.getType() == ColumnType.INT);
+
+    tested = resolver.parseName("post_page_event_var2");
+
+    assertTrue(tested.getName().equals("post_page_event_var2"));
+    assertTrue(tested.getLookupGroup() == null);
+    assertTrue(tested.getType() == ColumnType.STRING);
+
   }
 
 }

@@ -12,7 +12,8 @@ public enum ColumnType {
   INT_ARRAY("array<int>"),
   LONG_ARRAY("array<long>"),
   FLOAT_ARRAY("array<float>"),
-  TIMESTAMP("timestamp");
+  TIMESTAMP("timestamp"),
+  BOOLEAN("boolean");
 
   public String name;
 

@@ -18,9 +18,10 @@ public class SimpleColumnTypeResolver implements ColumnTypeResolver {
       Pattern.compile("event_list|plugins");
   protected Pattern _int =
       Pattern.compile("_visit|_height|_width|_visid_type|_num|(_hit$)" +
-          "|duplicate_|c_col|hit_s");
+          "|page_event$|duplicate_|c_col|hit_s");
   protected Pattern _long =
-      Pattern.compile("_id|_hash|userid|_visitor|_high|_low");
+      Pattern.compile("_id|_hash|userid|_visitor|_high|_low|^va_|(^visid_type$)");
+  protected Pattern _double = Pattern.compile("_rate");
   protected String _timestamp = "_gmt";
 
   @Override
@@ -46,6 +47,8 @@ public class SimpleColumnTypeResolver implements ColumnTypeResolver {
       return new Column(name, ColumnType.INT);
     } else if (_long.matcher(name).find()) {
       return new Column(name, ColumnType.LONG);
+    } else if (_double.matcher(name).find()) {
+      return new Column(name, ColumnType.DOUBLE);
     }
 
     return new Column(name, ColumnType.STRING, null);

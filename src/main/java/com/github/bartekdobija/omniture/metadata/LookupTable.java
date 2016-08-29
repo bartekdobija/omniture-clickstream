@@ -22,9 +22,10 @@ public class LookupTable {
       put("operating_systems", "os");
       put("color_depth", "color");
       put("event","event_list,post_event_list");
-      put("search_engines", "search_engine");
+      put("search_engines", "search_engine,post_search_engine,visit_search_engine");
       put("languages","language,post_sociallanguage,sociallanguage");
       put("javascript_version", "javascript");
+      put("referrer_type", "ref_type");
     }
 
   };
@@ -74,6 +75,10 @@ public class LookupTable {
         if (cols.length == 2) {
           for(String exc :group.split(EXC_SEPARATOR)) {
             tmp.setGroupValue(exc, cols[0], cols[1]);
+          }
+        } else if (cols.length == 3) {
+          for(String exc :group.split(EXC_SEPARATOR)) {
+            tmp.setGroupValue(exc, cols[0], cols[2]);
           }
         }
       }
