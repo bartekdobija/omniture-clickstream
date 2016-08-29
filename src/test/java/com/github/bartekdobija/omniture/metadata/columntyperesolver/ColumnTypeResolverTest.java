@@ -26,7 +26,7 @@ public class ColumnTypeResolverTest {
     tested = resolver.parseName("event_list");
 
     assertTrue(tested.getName().equals("event_list"));
-    assertTrue(tested.getLookupGroup().equals(EVENT_LIST_GROUP));
+    assertTrue(tested.getLookupGroup().equals("event_list"));
     assertTrue(tested.getType() == ColumnType.STRING_ARRAY);
 
     tested = resolver.parseName("test");
@@ -38,7 +38,7 @@ public class ColumnTypeResolverTest {
     tested = resolver.parseName("os");
 
     assertTrue(tested.getName().equals("os"));
-    assertTrue(tested.getLookupGroup().equals(OS_GROUP));
+    assertTrue(tested.getLookupGroup().equals("os"));
     assertTrue(tested.getType() == ColumnType.STRING);
 
     tested = resolver.parseName("timestamp_gmt");

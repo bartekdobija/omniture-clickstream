@@ -21,13 +21,7 @@ public class SimpleColumnTypeResolver implements ColumnTypeResolver {
           "|duplicate_|c_col|hit_s");
   protected Pattern _long =
       Pattern.compile("_id|_hash|userid|_visitor|_high|_low");
-
   protected String _timestamp = "_gmt";
-  protected String _lookedUpNonStandardArray = "event_list";
-
-  public static final String EVENT_LIST_GROUP = "event";
-  public static final String OS_GROUP = "operating_systems";
-  public static final String SEARCH_ENGINE_GROUP = "search_engines";
 
   @Override
   public Column parseName(String name) {
@@ -39,17 +33,11 @@ public class SimpleColumnTypeResolver implements ColumnTypeResolver {
     if (_lookedUpString.matcher(name).find()) {
       return new Column(name, ColumnType.STRING, name);
     } else if (_lookedUpNonStandardString.matcher(name).find()) {
-      return new Column(
-          name,
-          ColumnType.STRING,
-          name.equals("os") ? OS_GROUP : SEARCH_ENGINE_GROUP
-      );
+      return new Column(name, ColumnType.STRING, name);
     } else if (name.contains(_timestamp)) {
       return new Column(name, ColumnType.TIMESTAMP);
     } else if (_string.matcher(name).find()) {
       return new Column(name, ColumnType.STRING);
-    } else if (name.contains(_lookedUpNonStandardArray)) {
-      return new Column(name, ColumnType.STRING_ARRAY, EVENT_LIST_GROUP);
     } else if (_lookedUpArray.matcher(name).find()) {
       return new Column(name, ColumnType.STRING_ARRAY, name);
     } else if (_array.matcher(name).find()) {
