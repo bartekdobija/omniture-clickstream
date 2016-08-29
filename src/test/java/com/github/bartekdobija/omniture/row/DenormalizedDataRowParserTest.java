@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class OmnitureRowParserTest {
+public class DenormalizedDataRowParserTest {
 
   private static final String EMPTY_ROW = "";
   private static final String VALID_ROW =
@@ -71,7 +71,7 @@ public class OmnitureRowParserTest {
     expectedTimestamp.setTimeInMillis(1423556690 * 1000L);
 
     RowParser parser =
-        OmnitureRowParser.newInstance(VALID_ROW_SCHEMA, lookupTable);
+        DenormalizedDataRowParser.newInstance(VALID_ROW_SCHEMA, lookupTable);
 
     Row row = parser.parse(VALID_ROW);
 
@@ -106,7 +106,7 @@ public class OmnitureRowParserTest {
   public void emptyRow() throws RowParserException {
 
     RowParser parser =
-        OmnitureRowParser.newInstance(VALID_ROW_SCHEMA, new LookupTableIndex());
+        DenormalizedDataRowParser.newInstance(VALID_ROW_SCHEMA, new LookupTableIndex());
     Row row = parser.parse(EMPTY_ROW);
 
     assertEquals(null, row);
@@ -129,7 +129,7 @@ public class OmnitureRowParserTest {
     lookupTable.setGroupValue(TEST_GROUP_NAME, "ta", MOCKED_VALUE2);
 
     RowParser parser =
-        OmnitureRowParser.newInstance(VALID_ROW_SCHEMA, lookupTable);
+        DenormalizedDataRowParser.newInstance(VALID_ROW_SCHEMA, lookupTable);
 
     Row row = parser.parse(ALL_MISSING_ROW);
 
@@ -164,7 +164,7 @@ public class OmnitureRowParserTest {
     lookupTable.setGroupValue(TEST_GROUP_NAME, "ta", MOCKED_VALUE2);
 
     RowParser parser =
-        OmnitureRowParser.newInstance(VALID_ROW_SCHEMA, lookupTable);
+        DenormalizedDataRowParser.newInstance(VALID_ROW_SCHEMA, lookupTable);
 
     Row row = parser.parse(INVALID_TYPE_ROW);
 

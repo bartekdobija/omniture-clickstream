@@ -6,10 +6,7 @@ import com.github.bartekdobija.omniture.metadata.OmnitureMetadata;
 import com.github.bartekdobija.omniture.metadata.OmnitureMetadataFactory;
 import static org.junit.Assert.*;
 
-import com.github.bartekdobija.omniture.row.OmnitureRowParser;
-import com.github.bartekdobija.omniture.row.Row;
-import com.github.bartekdobija.omniture.row.RowParserException;
-import com.github.bartekdobija.omniture.row.RowParserStats;
+import com.github.bartekdobija.omniture.row.*;
 import org.junit.Test;
 
 import java.util.List;
@@ -37,7 +34,7 @@ public class SampleUseCaseTest {
 
     OmnitureMetadata metadata =
         new OmnitureMetadataFactory().create(MANIFEST_FILE);
-    OmnitureRowParser parser = OmnitureRowParser.newInstance(metadata);
+    RowParser parser = DenormalizedDataRowParser.newInstance(metadata);
     Row row = parser.parse(ROW_STRING);
 
     assertNotNull(row);
@@ -58,8 +55,8 @@ public class SampleUseCaseTest {
     List<OmnitureMetadata> metadatas =
         new OmnitureMetadataFactory().create(MANIFEST_LIST, LIST_SEPARATOR);
 
-    OmnitureRowParser parserA = OmnitureRowParser.newInstance(metadatas.get(0));
-    OmnitureRowParser parserB = OmnitureRowParser.newInstance(metadatas.get(1));
+    RowParser parserA = DenormalizedDataRowParser.newInstance(metadatas.get(0));
+    RowParser parserB = DenormalizedDataRowParser.newInstance(metadatas.get(1));
 
     assertNotNull(parserA);
     assertNotNull(parserB);

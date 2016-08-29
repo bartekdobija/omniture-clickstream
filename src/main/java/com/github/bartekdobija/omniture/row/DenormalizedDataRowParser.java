@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
-public class OmnitureRowParser implements RowParser {
+public class DenormalizedDataRowParser implements RowParser {
 
   public static final char DEFAULT_ARRAY_SEPARATOR = ',';
   public static final char DEFAULT_COLUMN_SEPARATOR = '\t';
@@ -22,7 +22,7 @@ public class OmnitureRowParser implements RowParser {
   private long emptyRowCount = 0;
   private long exceptionCount = 0;
 
-  protected OmnitureRowParser(
+  protected DenormalizedDataRowParser(
       Column[] cols,
       LookupTableIndex index,
       char columnSeparator,
@@ -35,17 +35,17 @@ public class OmnitureRowParser implements RowParser {
     timestampTemplate = new Timestamp(0);
   }
 
-  public static OmnitureRowParser newInstance() throws RowParserException {
-    return new OmnitureRowParser(
+  public static DenormalizedDataRowParser newInstance() throws RowParserException {
+    return new DenormalizedDataRowParser(
         null, null, DEFAULT_COLUMN_SEPARATOR, DEFAULT_ARRAY_SEPARATOR);
   }
 
-  public static OmnitureRowParser newInstance(OmnitureMetadata meta)
+  public static DenormalizedDataRowParser newInstance(OmnitureMetadata meta)
       throws RowParserException {
     return newInstance(meta, DEFAULT_COLUMN_SEPARATOR, DEFAULT_ARRAY_SEPARATOR);
   }
 
-  public static OmnitureRowParser newInstance(
+  public static DenormalizedDataRowParser newInstance(
       OmnitureMetadata meta,
       char separator,
       char arraySeparator)
@@ -64,15 +64,15 @@ public class OmnitureRowParser implements RowParser {
     }
   }
 
-  public static OmnitureRowParser newInstance(Column[] cols,
-                                              LookupTableIndex index)
+  public static DenormalizedDataRowParser newInstance(Column[] cols,
+                                                      LookupTableIndex index)
       throws RowParserException {
     return newInstance(
         cols, index, DEFAULT_COLUMN_SEPARATOR, DEFAULT_ARRAY_SEPARATOR);
   }
 
-  public static OmnitureRowParser newInstance(List<Column> cols,
-                                              LookupTableIndex index)
+  public static DenormalizedDataRowParser newInstance(List<Column> cols,
+                                                      LookupTableIndex index)
       throws RowParserException {
     return newInstance(
         cols.toArray(new Column[cols.size()]),
@@ -82,7 +82,7 @@ public class OmnitureRowParser implements RowParser {
     );
   }
 
-  public static OmnitureRowParser newInstance(
+  public static DenormalizedDataRowParser newInstance(
       Header header,
       LookupTableIndex index) throws RowParserException {
     try {
@@ -98,12 +98,12 @@ public class OmnitureRowParser implements RowParser {
     }
   }
 
-  public static OmnitureRowParser newInstance(
+  public static DenormalizedDataRowParser newInstance(
       Column[] cols,
       LookupTableIndex index,
       char colSeparator,
       char arrSeparator) throws RowParserException {
-    return new OmnitureRowParser(cols, index, colSeparator, arrSeparator);
+    return new DenormalizedDataRowParser(cols, index, colSeparator, arrSeparator);
   }
 
   @Override
@@ -309,7 +309,7 @@ public class OmnitureRowParser implements RowParser {
 
   @Override
   public String toString() {
-    return "OmnitureRowParser{" +
+    return "DenormalizedDataRowParser{" +
         "columns=" + Arrays.toString(columns) +
         ", lookupTableIndex=" + lookupTableIndex +
         ", arraySeparator=" + arraySeparator +
