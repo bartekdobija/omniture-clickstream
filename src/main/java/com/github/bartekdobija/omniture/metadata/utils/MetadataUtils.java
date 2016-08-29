@@ -13,6 +13,7 @@ import sun.tools.jar.Manifest;
 
 import java.io.*;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.zip.GZIPInputStream;
 
@@ -23,6 +24,10 @@ public class MetadataUtils {
   private static final String SEPARATOR = "/";
   private static final int LOOKUP_FILE_ENTRY_GROUP = 1;
   private static final int ZERO_LENGTH = 0;
+  private static final char NEW_LINE_CHAR = '\n';
+  private static final char SPACE_CHAR = ' ';
+  private static final char COMMA_CHAR = ',';
+  private static final String HIVE_TPL_LOCATION = "/hive/log.q.tpl";
 
   public static OmnitureMetadata fromOmnitureManifest(OmnitureManifest manifest)
       throws ManifestException {
@@ -69,6 +74,23 @@ public class MetadataUtils {
     }
   }
 
+  public static String hiveTableDefinition(OmnitureMetadata meta) {
+    InputStream s = MetadataUtils.class.getResourceAsStream(HIVE_TPL_LOCATION);
+    BufferedReader bf = new BufferedReader(
+        new InputStreamReader(s, StandardCharsets.UTF_8));
+    StringBuilder sb = new StringBuilder();
+    try {
+      String line;
+      while ((line = bf.readLine()) != null) sb.append(line).append("\n");
+      return sb.toString()
+          .replace("${COLUMNS}", renderCols(meta))
+          .replaceAll(ColumnType.LONG.name, ColumnType.BIGINT.name);
+    } catch (IOException | MetadataException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
   public static Map<String, String> getArchivedContent(
       InputStream stream, List<String> fileNames) throws MetadataException {
 
@@ -105,6 +127,21 @@ public class MetadataUtils {
     }
 
     return !result.isEmpty() ? result : null;
+  }
+
+  private static String renderCols(OmnitureMetadata meta)
+      throws MetadataException {
+    List<Column> cols = meta.getHeader().getColumns();
+    StringBuilder sb = new StringBuilder();
+    sb.append(NEW_LINE_CHAR);
+    int size = cols.size();
+    for(int i = 0; i < size; i++) {
+      Column c = cols.get(i);
+      sb.append(c.getName()).append(SPACE_CHAR).append(c.getType().name);
+      if (i < size - 1) sb.append(COMMA_CHAR);
+      sb.append(NEW_LINE_CHAR);
+    }
+    return sb.toString();
   }
 
   private static List<DataFile> dataFileList(URI dataDir, Manifest manifest) {

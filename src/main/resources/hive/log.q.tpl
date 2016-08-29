@@ -1,0 +1,1 @@
+create external table ${TABLE_NAME}(${COLUMNS}) stored as parquet location '${LOCATION}'

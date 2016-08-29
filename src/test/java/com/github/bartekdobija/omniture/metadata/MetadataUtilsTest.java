@@ -46,4 +46,19 @@ public class MetadataUtilsTest {
 
   }
 
+  @Test
+  public void asHiveSchema() throws MetadataException {
+
+    OmnitureMetadata meta =
+        OmnitureMetadataFactory.newInstance().create(manifestFile);
+
+    String schema = MetadataUtils.hiveTableDefinition(meta);
+
+    assertNotNull(schema);
+    assertTrue(schema.contains("accept_language string"));
+    assertTrue(schema.contains("zip string"));
+    assertTrue(schema.contains("product_list array<string>"));
+    assertTrue(schema.contains("mobile_id bigint"));
+  }
+
 }
