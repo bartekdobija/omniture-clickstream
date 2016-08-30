@@ -16,11 +16,11 @@ public class DenormalizedDataRowParserTest {
   private static final String EMPTY_ROW = "";
   private static final String VALID_ROW =
       "\ttest\t666\t2\t12.50\t2.50\t12.540\t120.500\tga,ta,ca,,da" +
-          "\t1423556690\t35884732\t2511725138\t6851172488903270000\t0\t10000";
-  private static final String ALL_MISSING_ROW = "\t\t\t\t\t\t\t\t\t\t\t";
+          "\t1423556690\t35884732\t2511725138\t6851172488903270000\t0";
+  private static final String ALL_MISSING_ROW = "\t\t\t\t\t\t\t\t\t\t";
   private static final String INVALID_TYPE_ROW =
       "\t6\tstring\tstring\tstring\tstring\tstring\tstring\t6" +
-          "\tstring\tx\ty\tstring\tstring";
+          "\tstring\tx\ty\tstring";
 
   private static final String TEST_GROUP_NAME = "test";
   private static final String MOCKED_VALUE1 = "mockedvalue#1";
@@ -40,8 +40,7 @@ public class DenormalizedDataRowParserTest {
       new Column("k", ColumnType.LONG),
       new Column("l", ColumnType.LONG),
       new Column("m", ColumnType.LONG),
-      new Column("n", ColumnType.TIMESTAMP),
-      new Column("o", ColumnType.TIMESTAMP)
+      new Column("n", ColumnType.TIMESTAMP)
 
   };
 
@@ -59,8 +58,7 @@ public class DenormalizedDataRowParserTest {
       new Column("k", ColumnType.LONG),
       new Column("l", ColumnType.LONG),
       new Column("m", ColumnType.LONG),
-      new Column("n", ColumnType.TIMESTAMP),
-      new Column("o", ColumnType.TIMESTAMP)
+      new Column("n", ColumnType.TIMESTAMP)
 
   );
 
@@ -98,7 +96,6 @@ public class DenormalizedDataRowParserTest {
     assertEquals(2511725138L, row.get(11));
     assertEquals(6851172488903270000L, row.get(12));
     assertEquals(null, row.get(13));
-    assertEquals("1970-01-01 03:46:40.0", row.get(14).toString());
 
     RowParserStats stats = parser.getRowParserStats();
 
@@ -153,13 +150,12 @@ public class DenormalizedDataRowParserTest {
     assertEquals(null, row.get(11));
     assertEquals(null, row.get(12));
     assertEquals(null, row.get(13));
-    assertEquals(null, row.get(14));
 
     RowParserStats stats = parser.getRowParserStats();
 
     assertEquals(1, stats.getParsedCount());
     assertEquals(0, stats.getEmptyRowCount());
-    assertEquals(11, stats.getEmptyColumnCount());
+    assertEquals(10, stats.getEmptyColumnCount());
     assertEquals(0, stats.getExceptionCount());
 
   }
@@ -190,13 +186,12 @@ public class DenormalizedDataRowParserTest {
     assertEquals(null, row.get(11));
     assertEquals(null, row.get(12));
     assertEquals(null, row.get(13));
-    assertEquals(null, row.get(14));
 
     RowParserStats stats = parser.getRowParserStats();
 
     assertEquals(1, stats.getParsedCount());
     assertEquals(0, stats.getEmptyRowCount());
-    assertEquals(3, stats.getEmptyColumnCount());
+    assertEquals(2, stats.getEmptyColumnCount());
     assertEquals(11, stats.getExceptionCount());
 
     row = parser.parse(INVALID_TYPE_ROW);
