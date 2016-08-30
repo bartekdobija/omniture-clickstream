@@ -10,6 +10,7 @@ public class DenormalizedDataRowParser implements RowParser {
 
   public static final char DEFAULT_ARRAY_SEPARATOR = ',';
   public static final char DEFAULT_COLUMN_SEPARATOR = '\t';
+  public static final boolean DEFAULT_TIMESTAMP_NULL_ON_ZERO = true;
 
   private Column[] columns;
   private LookupTableIndex lookupTableIndex;
@@ -20,6 +21,7 @@ public class DenormalizedDataRowParser implements RowParser {
 
   private long parsedCount = 0;
   private long emptyRowCount = 0;
+  private long emptyColumnCount = 0;
   private long exceptionCount = 0;
 
   protected DenormalizedDataRowParser(
@@ -144,17 +146,21 @@ public class DenormalizedDataRowParser implements RowParser {
 
   @Override
   public RowParserStats getRowParserStats() {
-    return new RowParserStats(parsedCount, emptyRowCount, exceptionCount);
+    return new RowParserStats(
+        parsedCount, emptyRowCount, emptyColumnCount, exceptionCount);
   }
 
   private Object parseSubset(char[] line, int start, int end, int colIndex) {
+
+    if(start == end) {
+      emptyColumnCount++;
+      return null;
+    }
+
     String group = columns[colIndex].getLookupGroup();
     ColumnType type = columns[colIndex].getType();
 
     if (type == ColumnType.STRING) {
-      if (start == end) {
-        return null;
-      }
       String buff = String.valueOf(Arrays.copyOfRange(line, start, end));
       return group != null
           ? lookupTableIndex.getGroupValue(group, buff, buff)
@@ -168,7 +174,7 @@ public class DenormalizedDataRowParser implements RowParser {
     } else if (type == ColumnType.STRING_ARRAY) {
       return asStrings(line, start, end, group);
     } else if (type == ColumnType.TIMESTAMP) {
-      return asTimestamp(line, start, end);
+      return asTimestamp(line, start, end, DEFAULT_TIMESTAMP_NULL_ON_ZERO);
     } else if (type == ColumnType.LONG) {
       return asLong(line, start, end);
     }
@@ -177,14 +183,11 @@ public class DenormalizedDataRowParser implements RowParser {
   }
 
   private Integer asInteger(char[] line, int start, int end) {
-    if (start == end) {
-      return null;
-    }
-
     int result = 0;
     for (int i = start; i < end; i++) {
       int digit = (int) line[i] - (int) '0';
       if ((digit < 0) || (digit > 9)) {
+        exceptionCount++;
         return null;
       }
       result = (result * 10) + digit;
@@ -192,26 +195,25 @@ public class DenormalizedDataRowParser implements RowParser {
     return result;
   }
 
-  private Timestamp asTimestamp(char[] line, int start, int end) {
+  private Timestamp asTimestamp(
+      char[] line, int start, int end, boolean zeroAsNull) {
     Long l;
-    if (start == end || (l = asLong(line, start, end)) == null) {
+    if ((l = asLong(line, start, end)) == null || (l == 0 && zeroAsNull)) {
+      emptyColumnCount++;
       return null;
     }
 
     Timestamp ts = (Timestamp) timestampTemplate.clone();
-    ts.setTime(l * 1000);
+    ts.setTime(l * 1000L);
     return ts;
   }
 
   private Long asLong(char[] line, int start, int end) {
-    if (start == end) {
-      return null;
-    }
-
     long result = 0;
     for (int i = start; i < end; i++) {
       long digit = (long) line[i] - (long) '0';
       if ((digit < 0) || (digit > 9)) {
+        exceptionCount++;
         return null;
       }
       result = (result * 10) + digit;
@@ -225,10 +227,6 @@ public class DenormalizedDataRowParser implements RowParser {
   }
 
   private Double asDouble(char[] data, int start, int end) {
-    if (start == end) {
-      return null;
-    }
-
     double result = 0;
     double div = 0;
     for (int i = start; i< end; i++) {
@@ -237,6 +235,7 @@ public class DenormalizedDataRowParser implements RowParser {
         div = 1;
         continue;
       } else if ((digit < 0) || (digit > 9)) {
+        exceptionCount++;
         return null;
       }
       result = (result * 10) + digit;
@@ -247,11 +246,6 @@ public class DenormalizedDataRowParser implements RowParser {
   }
 
   private String[] asStrings(char[] data, int start, int end, String group) {
-
-    if (start == end) {
-      return null;
-    }
-
     int[] sepPos = new int[end - start];
     int i, arrSize;
     for (i = start, arrSize = 0; i < end; i++) {

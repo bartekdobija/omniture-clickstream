@@ -6,6 +6,7 @@ public class RowParserStats implements Serializable {
 
   private long parsedCount;
   private long emptyRowCount;
+  private long emptyColumnCount;
   private long exceptionCount;
 
   public RowParserStats() {
@@ -13,9 +14,14 @@ public class RowParserStats implements Serializable {
   }
 
   public RowParserStats(
-      long parsedCount, long emptyRowCount, long exceptionCount) {
+      long parsedCount,
+      long emptyRowCount,
+      long emptyColumnCount,
+      long exceptionCount) {
+
     this.parsedCount = parsedCount;
     this.emptyRowCount = emptyRowCount;
+    this.emptyColumnCount = emptyColumnCount;
     this.exceptionCount = exceptionCount;
   }
 
@@ -41,5 +47,13 @@ public class RowParserStats implements Serializable {
 
   public void setExceptionCount(long exceptionCount) {
     this.exceptionCount = exceptionCount;
+  }
+
+  public long getEmptyColumnCount() {
+    return emptyColumnCount;
+  }
+
+  public void setEmptyColumnCount(long emptyColumnCount) {
+    this.emptyColumnCount = emptyColumnCount;
   }
 }
