@@ -192,7 +192,7 @@ public class DenormalizedDataRowParserTest {
     assertEquals(1, stats.getParsedCount());
     assertEquals(0, stats.getEmptyRowCount());
     assertEquals(2, stats.getEmptyColumnCount());
-    assertEquals(11, stats.getExceptionCount());
+    assertEquals(10, stats.getExceptionCount());
 
     row = parser.parse(INVALID_TYPE_ROW);
 
