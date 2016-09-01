@@ -3,9 +3,12 @@ package com.github.bartekdobija.omniture.loader;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.fs.s3.S3FileSystem;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+
 
 public class S3DataLoader implements DataLoader {
 
@@ -19,8 +22,9 @@ public class S3DataLoader implements DataLoader {
 
   @Override
   public InputStream stream() throws DataLoaderException {
+
     try {
-      s3 = FileSystem.get(new Configuration());
+      s3 = S3FileSystem.get(new Configuration());
       is = s3.open(new Path(path));
       return is;
     } catch (IOException e) {

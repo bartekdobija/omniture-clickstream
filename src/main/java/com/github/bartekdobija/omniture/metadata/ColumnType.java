@@ -13,7 +13,10 @@ public enum ColumnType {
   LONG_ARRAY("array<long>"),
   FLOAT_ARRAY("array<float>"),
   TIMESTAMP("timestamp"),
-  BOOLEAN("boolean");
+  BOOLEAN("boolean"),
+  STRING_MAP("map<string, string>"),
+  INT_MAP("map<int, int>"),
+  IS_MAP("map<int, string>");
 
   public String name;
 
