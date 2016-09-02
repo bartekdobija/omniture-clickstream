@@ -20,7 +20,8 @@ public class DataLoaderUtils {
       if (protocol.equals(DataSchemes.LOCAL.value)) {
         return new LocalFSDataLoader(uri);
       } else if (protocol.equals(DataSchemes.S3.value)
-          || protocol.equals(DataSchemes.S3N.value) ) {
+          || protocol.equals(DataSchemes.S3N.value)
+          || protocol.equals(DataSchemes.S3A.value)) {
         return new S3DataLoader(uri);
       } else if (protocol.equals(DataSchemes.HDFS.value)) {
         return new HDFSDataLoader(uri);

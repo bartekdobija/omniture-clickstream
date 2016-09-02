@@ -4,10 +4,12 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.fs.s3.S3FileSystem;
+import org.apache.hadoop.fs.s3a.S3AFileSystem;
 
 import java.io.IOException;
 import java.io.InputStream;
-
+import java.net.URI;
+import java.net.URISyntaxException;
 
 
 public class S3DataLoader implements DataLoader {
@@ -22,9 +24,10 @@ public class S3DataLoader implements DataLoader {
 
   @Override
   public InputStream stream() throws DataLoaderException {
-
     try {
-      s3 = S3FileSystem.get(new Configuration());
+      Configuration conf = new Configuration();
+      conf.set("fs.defaultFS", getBucket(path));
+      s3 = S3AFileSystem.get(conf);
       is = s3.open(new Path(path));
       return is;
     } catch (IOException e) {
@@ -36,6 +39,19 @@ public class S3DataLoader implements DataLoader {
   public void close() {
     if (is != null) try { is.close(); } catch (IOException e) {}
     if (s3 != null) try { s3.close(); } catch (IOException e) {}
+  }
+
+  public static String getBucket(String uri) {
+    if (uri == null || uri.isEmpty()) {
+      return null;
+    }
+    try {
+      URI u = new URI(uri);
+      return u.getScheme() + "://" + u.getHost();
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+      return null;
+    }
   }
 
 }

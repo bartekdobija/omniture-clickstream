@@ -33,6 +33,30 @@ public class DataLoaderTest {
     try (DataLoader dl = new S3DataLoader(LOCAL_FS_FILE)) {
       assertEquals(dl.stream().read(), 68);
     }
+
+    try(DataLoader dl = new S3DataLoader(
+        S3DataLoader.getBucket("s3://fr-bi-omniture/manifest.txt"))) {
+      assertNotNull(dl);
+    }
+  }
+
+  @Test
+  public void getBucket() {
+    assertEquals("s3://fr-bi-omniture",
+        S3DataLoader.getBucket("s3://fr-bi-omniture/dir/manifest.txt"));
+
+    assertEquals("s3a://fr-bi-omniture",
+        S3DataLoader.getBucket("s3a://fr-bi-omniture/dir/manifest.txt"));
+
+    assertEquals("s3n://fr-bi-omniture",
+        S3DataLoader.getBucket("s3n://fr-bi-omniture/dir/manifest.txt"));
+
+    assertEquals("s3n://fr-bi-omniture",
+        S3DataLoader.getBucket("s3n://a:b@fr-bi-omniture/dir/manifest.txt"));
+
+    assertEquals(null, S3DataLoader.getBucket(""));
+
+    assertEquals(null, S3DataLoader.getBucket(null));
   }
 
 }
