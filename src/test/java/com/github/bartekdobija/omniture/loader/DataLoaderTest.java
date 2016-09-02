@@ -39,6 +39,7 @@ public class DataLoaderTest {
   }
 
   @Test
+  @Ignore
   public void s3nDataLoader() throws DataLoaderException, IOException {
     try(DataLoader dl = new S3DataLoader("s3n://a/b.txt")) {
       InputStream is = dl.stream();
