@@ -1,9 +1,12 @@
 package com.github.bartekdobija.omniture.loader;
 
 
+import com.github.bartekdobija.omniture.loader.utils.DataLoaderUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import static org.junit.Assert.*;
 
@@ -29,34 +32,19 @@ public class DataLoaderTest {
   }
 
   @Test
-  public void S3DataLoader() throws DataLoaderException, IOException {
+  public void localS3DataLoader() throws DataLoaderException, IOException {
     try (DataLoader dl = new S3DataLoader(LOCAL_FS_FILE)) {
       assertEquals(dl.stream().read(), 68);
-    }
-
-    try(DataLoader dl = new S3DataLoader(
-        S3DataLoader.getBucket("s3://fr-bi-omniture/manifest.txt"))) {
-      assertNotNull(dl);
     }
   }
 
   @Test
-  public void getBucket() {
-    assertEquals("s3://fr-bi-omniture",
-        S3DataLoader.getBucket("s3://fr-bi-omniture/dir/manifest.txt"));
-
-    assertEquals("s3a://fr-bi-omniture",
-        S3DataLoader.getBucket("s3a://fr-bi-omniture/dir/manifest.txt"));
-
-    assertEquals("s3n://fr-bi-omniture",
-        S3DataLoader.getBucket("s3n://fr-bi-omniture/dir/manifest.txt"));
-
-    assertEquals("s3n://fr-bi-omniture",
-        S3DataLoader.getBucket("s3n://a:b@fr-bi-omniture/dir/manifest.txt"));
-
-    assertEquals(null, S3DataLoader.getBucket(""));
-
-    assertEquals(null, S3DataLoader.getBucket(null));
+  public void s3nDataLoader() throws DataLoaderException, IOException {
+    try(DataLoader dl = new S3DataLoader("s3n://a/b.txt")) {
+      InputStream is = dl.stream();
+      assertNotNull(is);
+      assertEquals(is.read(), 68);
+    }
   }
 
 }

@@ -32,4 +32,24 @@ public class DataLoaderUtils {
     throw new ManifestException("unsupported scheme");
   }
 
+  public static String getS3FS(String uri) {
+    if (uri == null || uri.isEmpty()) {
+      return null;
+    }
+    try {
+      URI u = new URI(uri);
+      String auth = "";
+      String userInfo = u.getUserInfo();
+
+      if (userInfo != null) {
+        auth = userInfo + "@";
+      }
+
+      return u.getScheme() + "://" + auth + u.getHost();
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
 }

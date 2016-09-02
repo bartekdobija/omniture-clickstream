@@ -33,4 +33,23 @@ public class DataLoaderUtilsTest {
     assertTrue(dl instanceof S3DataLoader);
   }
 
+  @Test
+  public void getS3FS() {
+    assertEquals("s3://bucket",
+        DataLoaderUtils.getS3FS("s3://bucket/dir/manifest.txt"));
+
+    assertEquals("s3a://bucket",
+        DataLoaderUtils.getS3FS("s3a://bucket/dir/manifest.txt"));
+
+    assertEquals("s3n://bucket",
+        DataLoaderUtils.getS3FS("s3n://bucket/dir/manifest.txt"));
+
+    assertEquals("s3n://a:b@bucket",
+        DataLoaderUtils.getS3FS("s3n://a:b@bucket/dir/manifest.txt"));
+
+    assertEquals(null, DataLoaderUtils.getS3FS(""));
+
+    assertEquals(null, DataLoaderUtils.getS3FS(null));
+  }
+
 }
