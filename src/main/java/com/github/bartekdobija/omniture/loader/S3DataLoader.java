@@ -1,7 +1,6 @@
 package com.github.bartekdobija.omniture.loader;
 
 import com.github.bartekdobija.omniture.loader.utils.DataLoaderUtils;
-import org.apache.commons.lang.NotImplementedException;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -20,7 +19,7 @@ import static org.apache.hadoop.fs.CommonConfigurationKeysPublic.*;
 
 public class S3DataLoader implements DataLoader {
 
-  private String path;
+  private String source;
   private String access;
   private String secret;
   private FileSystem s3;
@@ -35,7 +34,7 @@ public class S3DataLoader implements DataLoader {
   public static String S3_SECRET_KEY = "omniture.s3.secret.key";
 
   public S3DataLoader(String url) {
-    path = url;
+    source = url;
     access = System.getProperty(S3_ACCESS_KEY, null);
     secret = System.getProperty(S3_SECRET_KEY, null);
 
@@ -55,12 +54,17 @@ public class S3DataLoader implements DataLoader {
   @Override
   public InputStream stream() throws DataLoaderException {
     try {
-      s3 = getFileSystem(path);
-      is = s3.open(new Path(path));
+      s3 = getFileSystem(source);
+      is = s3.open(new Path(source));
       return is;
     } catch (IOException | URISyntaxException e) {
       throw new DataLoaderException(e);
     }
+  }
+
+  @Override
+  public String getSource() {
+    return source;
   }
 
   @Override

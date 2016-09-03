@@ -9,12 +9,12 @@ import java.io.InputStream;
 
 public class HDFSDataLoader implements DataLoader {
 
-  private String path;
+  private String source;
   private FileSystem hdfs;
   private InputStream is;
 
   public HDFSDataLoader(String url) {
-    path = url;
+    source = url;
   }
 
   @Override
@@ -22,12 +22,17 @@ public class HDFSDataLoader implements DataLoader {
 
     try {
       hdfs = FileSystem.get(new Configuration());
-      is = hdfs.open(new Path(path));
+      is = hdfs.open(new Path(source));
     } catch (IOException e) {
       throw new DataLoaderException(e);
     }
 
     return is;
+  }
+
+  @Override
+  public String getSource() {
+    return source;
   }
 
   @Override
