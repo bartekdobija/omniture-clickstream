@@ -19,14 +19,16 @@ public class ManifestUtilsTest {
     URI local = ManifestUtils.manifestParent("file:///bucket/manifest.txt");
 
     assertEquals("s3", s3.getScheme());
-    assertEquals("/bucket", s3.getPath());
+    assertEquals("bucket", s3.getHost());
 
     assertEquals("hdfs", hdfs.getScheme());
-    assertEquals("/master:8020/bucket", hdfs.getPath());
+    assertEquals("master", hdfs.getHost());
 
     assertEquals("file", local.getScheme());
     assertEquals("/bucket", local.getPath());
 
   }
+
+
 
 }

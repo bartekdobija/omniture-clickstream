@@ -31,11 +31,20 @@ public class ManifestUtils {
   }
 
   public static URI manifestParent(String url) throws ManifestException {
-    try {
-      return new URI(new File(url).getParent());
-    } catch (URISyntaxException e) {
-      throw new ManifestException(e);
+    if ((url == null) || url.equals("") || url.equals("/")) {
+      throw new ManifestException("exception");
     }
+
+    int lastSlashPos = url.lastIndexOf('/');
+
+    try{
+      if (lastSlashPos >= 0) {
+        return new URI(url.substring(0, lastSlashPos));
+      }
+    } catch (URISyntaxException e) {
+      throw new ManifestException("exception");
+    }
+    throw new ManifestException("exception");
   }
 
 }
