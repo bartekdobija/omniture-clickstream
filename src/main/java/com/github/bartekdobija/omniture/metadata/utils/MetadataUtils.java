@@ -129,6 +129,13 @@ public class MetadataUtils {
     return !result.isEmpty() ? result : null;
   }
 
+  public static LookupTableIndex asLookupTableIndex(Map<String, String> map) {
+    if (map == null) {
+      return null;
+    }
+    return new LookupTableIndex(map);
+  }
+
   private static String renderCols(OmnitureMetadata meta)
       throws MetadataException {
     List<Column> cols = meta.getHeader().getColumns();

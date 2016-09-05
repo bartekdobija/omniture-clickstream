@@ -8,7 +8,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MetadataUtilsTest {
 
@@ -59,6 +61,23 @@ public class MetadataUtilsTest {
     assertTrue(schema.contains("zip string"));
     assertTrue(schema.contains("product_list array<string>"));
     assertTrue(schema.contains("mobile_id bigint"));
+  }
+
+  @Test
+  public void asLookupTableIndex() {
+
+    Map<String, String> map = new HashMap<>();
+    map.put("a:b","c");
+    map.put("d:e","f");
+
+    LookupTableIndex index = MetadataUtils.asLookupTableIndex(map);
+
+    assertEquals("c", index.getGroupValue("a","b"));
+    assertEquals("f", index.getGroupValue("d","e"));
+
+    index = MetadataUtils.asLookupTableIndex(null);
+
+    assertNull(index);
   }
 
 }
