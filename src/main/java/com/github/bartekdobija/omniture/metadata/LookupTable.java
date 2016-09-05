@@ -8,14 +8,14 @@ import java.util.Map;
 
 public class LookupTable {
 
-  public static String[] REGISTERED_LOOKUP_TABLES = {
+  public static final String[] REGISTERED_LOOKUP_TABLES = {
     "browser.tsv", "browser_type.tsv", "color_depth.tsv", "connection_type.tsv",
     "country.tsv", "event.tsv", "event_lookup.tsv", "javascript_version.tsv",
     "languages.tsv", "operating_systems.tsv", "plugins.tsv",
     "referrer_type.tsv", "resolution.tsv", "search_engines.tsv"
   };
 
-  public static Map<String,String> namingExceptions =
+  public static final Map<String,String> NAMING_EXCEPTIONS =
       new HashMap<String, String>(){
 
     {
@@ -90,7 +90,7 @@ public class LookupTable {
 
   private String withNamingException(String group) {
     String ne;
-    if(group == null || (ne = namingExceptions.get(group)) == null) {
+    if(group == null || (ne = NAMING_EXCEPTIONS.get(group)) == null) {
       return group;
     }
     return ne;

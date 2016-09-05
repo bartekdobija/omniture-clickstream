@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class LookupTableIndex extends HashMap<String, String> {
 
-  public transient static char GROUP_SEPARATOR = ':';
+  public transient static final char GROUP_SEPARATOR = ':';
 
   public LookupTableIndex() {
 
