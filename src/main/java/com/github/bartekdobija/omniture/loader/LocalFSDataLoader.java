@@ -6,22 +6,26 @@ import java.net.URISyntaxException;
 
 public class LocalFSDataLoader implements DataLoader {
 
-  private URI path;
+  private String source;
   private FileInputStream fis;
 
   public LocalFSDataLoader(String url) throws DataLoaderException {
-    try { path = new URI(url); }
-    catch (URISyntaxException e) { throw new DataLoaderException(e); }
+    source = url;
   }
 
   @Override
   public InputStream stream() throws DataLoaderException {
     try {
-      fis = new FileInputStream(new File(path.getPath()));
+      fis = new FileInputStream(new File(new URI(source).getPath()));
       return fis;
-    } catch (IOException e) {
+    } catch (IOException | URISyntaxException e) {
       throw new DataLoaderException(e);
     }
+  }
+
+  @Override
+  public String getSource() {
+    return source;
   }
 
   @Override
