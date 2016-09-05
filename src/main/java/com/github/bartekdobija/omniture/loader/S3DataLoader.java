@@ -1,7 +1,6 @@
 package com.github.bartekdobija.omniture.loader;
 
 import com.github.bartekdobija.omniture.loader.utils.DataLoaderUtils;
-import org.apache.commons.lang.NotImplementedException;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -78,28 +77,28 @@ public class S3DataLoader implements DataLoader {
     String scheme = new URI(path).getScheme().toLowerCase();
 
     if (scheme.equals(DataSchemes.S3N.value)) {
-      setIfMissing(conf, "fs.s3n.awsAccessKeyId", access);
-      setIfMissing(conf, "fs.s3n.awsSecretAccessKey", secret);
+      conf.set("fs.s3n.awsAccessKeyId", access);
+      conf.set("fs.s3n.awsSecretAccessKey", secret);
       return NativeS3FileSystem.get(conf);
     } else if (scheme.equals(DataSchemes.S3.value)) {
-      setIfMissing(conf, "fs.s3.awsAccessKeyId", access);
-      setIfMissing(conf, "fs.s3.awsSecretAccessKey", secret);
+      conf.set("fs.s3.awsAccessKeyId", access);
+      conf.set("fs.s3.awsSecretAccessKey", secret);
       return S3FileSystem.get(conf);
     } else if (scheme.equals(DataSchemes.LOCAL.value)) {
       return FileSystem.get(conf);
     }
 
-    setIfMissing(conf, Constants.ACCESS_KEY, access);
-    setIfMissing(conf, Constants.SECRET_KEY, secret);
+    conf.set(Constants.ACCESS_KEY, access);
+    conf.set(Constants.SECRET_KEY, secret);
 
     if (proxyHost != null) {
-      setIfMissing(conf, Constants.PROXY_HOST, proxyHost);
-      setIfMissing(conf, Constants.PROXY_PORT, proxyPort);
+      conf.set(Constants.PROXY_HOST, proxyHost);
+      conf.set(Constants.PROXY_PORT, proxyPort);
       if (proxyUser != null) {
-        setIfMissing(conf, Constants.PROXY_USERNAME, proxyUser);
+        conf.set(Constants.PROXY_USERNAME, proxyUser);
       }
       if (proxyPass != null) {
-        setIfMissing(conf, Constants.PROXY_PASSWORD, proxyPass);
+        conf.set(Constants.PROXY_PASSWORD, proxyPass);
       }
 
     }
