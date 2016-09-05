@@ -47,7 +47,11 @@ public class S3DataLoader implements DataLoader {
   @Override
   public InputStream stream() throws DataLoaderException {
 
-    ClientConfiguration awsConf = new ClientConfiguration();
+    if (source == null) {
+      throw new DataLoaderException("data source cannot be empty");
+    }
+
+    awsConf = new ClientConfiguration();
     awsConf.setProxyHost(proxyHost);
     awsConf.setProxyPort(proxyPort);
 

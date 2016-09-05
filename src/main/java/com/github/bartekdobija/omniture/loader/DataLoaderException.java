@@ -6,4 +6,7 @@ public class DataLoaderException extends Exception {
   public DataLoaderException(final Throwable ex) {
     super(ex);
   }
+  public DataLoaderException(final String msg) {
+    super(msg);
+  }
 }
