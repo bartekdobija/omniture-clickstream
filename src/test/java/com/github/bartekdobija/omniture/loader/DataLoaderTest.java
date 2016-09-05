@@ -1,7 +1,6 @@
 package com.github.bartekdobija.omniture.loader;
 
 
-import com.github.bartekdobija.omniture.loader.utils.DataLoaderUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 import java.io.File;
@@ -28,13 +27,6 @@ public class DataLoaderTest {
   public void HDFSDataLoader() throws DataLoaderException, IOException {
     try (DataLoader ds = new HDFSDataLoader(LOCAL_FS_FILE)) {
       assertEquals(ds.stream().read(), 68);
-    }
-  }
-
-  @Test
-  public void localS3DataLoader() throws DataLoaderException, IOException {
-    try (DataLoader dl = new S3DataLoader(LOCAL_FS_FILE)) {
-      assertEquals(dl.stream().read(), 68);
     }
   }
 

@@ -46,8 +46,8 @@
     <commons-compress.version>1.12</commons-compress.version>
     <commons-compress.scope>compile</commons-compress.scope>
 
-    <jets3t.version>0.9.4</jets3t.version>
-    <jets3t.scope>provided</jets3t.scope>
+    <aws-java-sdk.version>1.11.31</aws-java-sdk.version>
+    <aws-java-sdk.scope>provided</aws-java-sdk.scope>
 
   </properties>
 
@@ -102,12 +102,6 @@
         <scope>${hadoop.scope}</scope>
       </dependency>
       <dependency>
-        <groupId>org.apache.hadoop</groupId>
-        <artifactId>hadoop-aws</artifactId>
-        <version>${hadoop.version}</version>
-        <scope>${hadoop.scope}</scope>
-      </dependency>
-      <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>${junit.version}</version>
@@ -120,10 +114,10 @@
         <scope>${commons-compress.scope}</scope>
       </dependency>
       <dependency>
-        <groupId>net.java.dev.jets3t</groupId>
-        <artifactId>jets3t</artifactId>
-        <version>${jets3t.version}</version>
-        <scope>${jets3t.scope}</scope>
+        <groupId>com.amazonaws</groupId>
+        <artifactId>aws-java-sdk</artifactId>
+        <version>${aws-java-sdk.version}</version>
+        <scope>${aws-java-sdk.scope}</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -134,10 +128,6 @@
       <artifactId>hadoop-client</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.hadoop</groupId>
-      <artifactId>hadoop-aws</artifactId>
-    </dependency>
-    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
     </dependency>
@@ -146,8 +136,8 @@
       <artifactId>commons-compress</artifactId>
     </dependency>
     <dependency>
-      <groupId>net.java.dev.jets3t</groupId>
-      <artifactId>jets3t</artifactId>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk</artifactId>
     </dependency>
   </dependencies>
 

@@ -19,9 +19,9 @@ public class DataLoaderUtils {
       String protocol = new URI(uri).getScheme();
       if (protocol.equals(DataSchemes.LOCAL.value)) {
         return new LocalFSDataLoader(uri);
-      } else if (protocol.equals(DataSchemes.S3.value)
+      } else if (protocol.equals(DataSchemes.S3A.value)
           || protocol.equals(DataSchemes.S3N.value)
-          || protocol.equals(DataSchemes.S3A.value)) {
+          || protocol.equals(DataSchemes.S3.value) ) {
         return new S3DataLoader(uri);
       } else if (protocol.equals(DataSchemes.HDFS.value)) {
         return new HDFSDataLoader(uri);
