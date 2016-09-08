@@ -150,10 +150,19 @@ public class DenormalizedDataRowParser implements RowParser {
         parsedCount, emptyRowCount, emptyColumnCount, exceptionCount);
   }
 
-  private Object parseSubset(char[] line, int start, int end, int colIndex) {
+  private Object parseSubset(
+      final char[] line,
+      final int start,
+      final int end,
+      final int colIndex) {
 
     if(start == end) {
       emptyColumnCount++;
+      return null;
+    }
+
+    if (colIndex >= columns.length) {
+      exceptionCount++;
       return null;
     }
 

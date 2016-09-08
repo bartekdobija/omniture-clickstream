@@ -14,6 +14,7 @@ import static org.junit.Assert.*;
 public class DenormalizedDataRowParserTest {
 
   private static final String EMPTY_ROW = "";
+  private static final String TAB_ROW = "\t";
   private static final String VALID_ROW =
       "\ttest\t666\t2\t12.50\t2.50\t12.540\t120.500\tga,ta,ca,,da" +
           "\t1423556690\t35884732\t2511725138\t6851172488903270000\t0";
@@ -21,6 +22,9 @@ public class DenormalizedDataRowParserTest {
   private static final String INVALID_TYPE_ROW =
       "\t6\tstring\tstring\tstring\tstring\tstring\tstring\t6" +
           "\tstring\tx\ty\tstring";
+
+  private static final String LOWER_COLUMN_NO = "\ttest\t666";
+  private static final String HIGHER_COLUMN_NO = "\ttest\t666\t12.5\t34\tasda";
 
   private static final String TEST_GROUP_NAME = "test";
   private static final String MOCKED_VALUE1 = "mockedvalue#1";
@@ -41,26 +45,14 @@ public class DenormalizedDataRowParserTest {
       new Column("l", ColumnType.LONG),
       new Column("m", ColumnType.LONG),
       new Column("n", ColumnType.TIMESTAMP)
-
   };
 
-  private static final List<Column> TEST_ROW_SCHEMA_LIST = Arrays.asList(
+  private static final Column[] SMALL_ROW_SCHEMA = {
       new Column("a", ColumnType.STRING),
       new Column("b", ColumnType.STRING),
       new Column("c", ColumnType.INT),
-      new Column("d", ColumnType.FLOAT),
-      new Column("e", ColumnType.DOUBLE),
-      new Column("f", ColumnType.FLOAT),
-      new Column("g", ColumnType.FLOAT),
-      new Column("h", ColumnType.FLOAT),
-      new Column("i", ColumnType.STRING_ARRAY, TEST_GROUP_NAME),
-      new Column("j", ColumnType.TIMESTAMP),
-      new Column("k", ColumnType.LONG),
-      new Column("l", ColumnType.LONG),
-      new Column("m", ColumnType.LONG),
-      new Column("n", ColumnType.TIMESTAMP)
-
-  );
+      new Column("d", ColumnType.FLOAT)
+  };
 
   @Test
   public void validRow() throws RowParserException {
@@ -119,6 +111,26 @@ public class DenormalizedDataRowParserTest {
 
     assertEquals(0, stats.getParsedCount());
     assertEquals(2, stats.getEmptyRowCount());
+    assertEquals(0, stats.getExceptionCount());
+
+  }
+
+  @Test
+  public void tabRow() throws RowParserException {
+
+    RowParser parser = DenormalizedDataRowParser.newInstance(
+        VALID_ROW_SCHEMA, new LookupTableIndex());
+    Row row = parser.parse(TAB_ROW);
+
+    assertEquals(null, row.get(0));
+    assertEquals(null, row.get(1));
+    assertEquals(null, row.get(2));
+
+    row = parser.parse(TAB_ROW);
+    RowParserStats stats = parser.getRowParserStats();
+
+    assertEquals(2, stats.getParsedCount());
+    assertEquals(0, stats.getEmptyRowCount());
     assertEquals(0, stats.getExceptionCount());
 
   }
@@ -196,6 +208,28 @@ public class DenormalizedDataRowParserTest {
 
     row = parser.parse(INVALID_TYPE_ROW);
 
+  }
+
+  @Test
+  public void columnNumberDifference() throws RowParserException {
+    RowParser parser = DenormalizedDataRowParser.newInstance(
+        SMALL_ROW_SCHEMA, new LookupTableIndex());
+
+    Row row = parser.parse(LOWER_COLUMN_NO);
+
+    assertEquals(null, row.get(0));
+    assertEquals("test", row.get(1));
+    assertEquals(666, row.get(2));
+    assertEquals(null, row.get(3));
+
+    row = parser.parse(HIGHER_COLUMN_NO);
+
+    assertEquals(null, row.get(0));
+    assertEquals("test", row.get(1));
+    assertEquals(666, row.get(2));
+    assertEquals(12.5F, row.get(3));
+    assertEquals(null, row.get(4));
+    assertEquals(null, row.get(5));
   }
 
 }
