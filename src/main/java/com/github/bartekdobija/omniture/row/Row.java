@@ -16,7 +16,10 @@ public class Row implements Iterable<Object>, Serializable, Cloneable {
   }
 
   public void add(Object o) {
-    try { columns[index++] = o; }
+    try {
+      columns[index] = o;
+      index++;
+    }
     catch (ArrayIndexOutOfBoundsException e) {}
   }
 

@@ -19,9 +19,13 @@ public class RowTest {
 
     row.add(1);
     row.add(2);
+    row.add(null);
+    row.add(null);
 
     assertEquals(1, row.get(0));
     assertEquals(2, row.get(1));
+    assertEquals(null, row.get(2));
+    assertEquals(null, row.get(3));
 
     Row cloned = (Row) row.clone();
 
@@ -40,6 +44,8 @@ public class RowTest {
     row.add(expected[0]);
     row.add(expected[1]);
     row.add(expected[2]);
+    row.add(null);
+    row.add(null);
 
     for(Object o : row) assertEquals(expected[i++], o);
 
