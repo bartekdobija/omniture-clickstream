@@ -42,7 +42,8 @@ public class DenormalizedDataRowParser implements RowParser {
     timestampTemplate = new Timestamp(0);
   }
 
-  public static DenormalizedDataRowParser newInstance() throws RowParserException {
+  public static DenormalizedDataRowParser newInstance()
+      throws RowParserException {
     return new DenormalizedDataRowParser(
         null, null, DEFAULT_COLUMN_SEPARATOR, DEFAULT_ARRAY_SEPARATOR);
   }
@@ -110,7 +111,8 @@ public class DenormalizedDataRowParser implements RowParser {
       LookupTableIndex index,
       char colSeparator,
       char arrSeparator) throws RowParserException {
-    return new DenormalizedDataRowParser(cols, index, colSeparator, arrSeparator);
+    return new DenormalizedDataRowParser(
+        cols, index, colSeparator, arrSeparator);
   }
 
   @Override
