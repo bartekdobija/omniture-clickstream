@@ -37,9 +37,11 @@ public class MetadataUtilsTest {
 
     assertEquals("Lynx 2.7.1", table.getGroupValue("browser","1"));
     assertEquals("Afrikaans", table.getGroupValue("language","2"));
+    assertEquals("1.8.5", table.getGroupValue("javascript", "12"));
 
     assertEquals("Lynx 2.7.1", index.getGroupValue("browser","1"));
     assertEquals("Afrikaans", index.getGroupValue("language","2"));
+    assertEquals("1.8.5", index.getGroupValue("javascript", "12"));
 
     List<DataFile> files = meta.getDataFiles();
 

@@ -9,7 +9,7 @@ public class SimpleColumnTypeResolver implements ColumnTypeResolver {
 
   protected Pattern _string = Pattern.compile("evar|prop");
   protected Pattern _lookedUpString =
-      Pattern.compile("browser|connection_type|(^color$)|country|language");
+      Pattern.compile("browser|connection_type|(^color$)|country|language|javascript");
   protected Pattern _lookedUpNonStandardString =
       Pattern.compile("(^os$)|search_engine");
 

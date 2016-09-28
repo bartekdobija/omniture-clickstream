@@ -92,7 +92,7 @@ public class ColumnTypeResolverTest {
     tested = resolver.parseName("javascript");
 
     assertTrue(tested.getName().equals("javascript"));
-    assertTrue(tested.getLookupGroup() == null);
+    assertTrue(tested.getLookupGroup() != null);
     assertTrue(tested.getType() == ColumnType.STRING);
 
     tested = resolver.parseName("post_visid_high");

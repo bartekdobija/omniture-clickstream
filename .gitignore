@@ -15,4 +15,4 @@ src/test/resources/output/
 *.iml
 *.ipr
 *.iws
-
+src/test/resources/data/*.tsv
