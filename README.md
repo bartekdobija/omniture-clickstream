@@ -14,7 +14,7 @@ Maven:
 <dependency>
   <groupId>com.github.bartekdobija</groupId>
   <artifactId>omniture-clickstream</artifactId>
-  <version>71deaff440</version>
+  <version>f0dfba4d32</version>
 </dependency>
 ```
 
