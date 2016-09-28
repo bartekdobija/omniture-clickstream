@@ -24,7 +24,7 @@ SBT:
 
 resolvers += "jitpack" at "https://jitpack.io"
 
-libraryDependencies += "com.github.bartekdobija" % "omniture-clickstream" % "71deaff440"
+libraryDependencies += "com.github.bartekdobija" % "omniture-clickstream" % "f0dfba4d32"
 
 ```
 
@@ -38,7 +38,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.bartekdobija:omniture-clickstream:71deaff440'
+    compile 'com.github.bartekdobija:omniture-clickstream:f0dfba4d32'
 }
 ```
 
