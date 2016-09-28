@@ -4,6 +4,10 @@ import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+/**
+ * Local FS backed {@link DataLoader} implementation.
+ * @since 0.1
+ */
 public class LocalFSDataLoader implements DataLoader {
 
   private String source;

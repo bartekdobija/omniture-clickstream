@@ -4,14 +4,20 @@ import com.github.bartekdobija.omniture.loader.utils.DataLoaderUtils;
 import com.github.bartekdobija.omniture.manifest.OmnitureManifest;
 import com.github.bartekdobija.omniture.manifest.ManifestException;
 
-import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * {@link OmnitureManifest} related convenience methods.
+ * @since 0.1
+ */
 public class ManifestUtils {
+
+  private static final String EMPTY_STRING = "";
+  private static final String SEPARATOR = "/";
 
   public static List<OmnitureManifest> fromUrl(String url, String separator)
       throws ManifestException {
@@ -31,11 +37,11 @@ public class ManifestUtils {
   }
 
   public static URI manifestParent(String url) throws ManifestException {
-    if ((url == null) || url.equals("") || url.equals("/")) {
+    if ((url == null) || url.equals(EMPTY_STRING) || url.equals(SEPARATOR)) {
       throw new ManifestException("exception");
     }
 
-    int lastSlashPos = url.lastIndexOf('/');
+    int lastSlashPos = url.lastIndexOf(SEPARATOR);
 
     try{
       if (lastSlashPos >= 0) {

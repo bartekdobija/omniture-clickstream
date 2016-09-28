@@ -7,6 +7,10 @@ import org.apache.hadoop.fs.Path;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * HDFS backed {@link DataLoader} implementation.
+ * @since 0.1
+ */
 public class HDFSDataLoader implements DataLoader {
 
   private String source;

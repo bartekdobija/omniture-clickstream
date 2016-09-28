@@ -28,6 +28,7 @@ public class MetadataUtils {
   private static final char SPACE_CHAR = ' ';
   private static final char COMMA_CHAR = ',';
   private static final String HIVE_TPL_LOCATION = "/hive/log.q.tpl";
+  private static final String COLS_TPL_KEY = "${COLUMNS}";
 
   public static OmnitureMetadata fromOmnitureManifest(OmnitureManifest manifest)
       throws ManifestException {
@@ -81,9 +82,11 @@ public class MetadataUtils {
     StringBuilder sb = new StringBuilder();
     try {
       String line;
-      while ((line = bf.readLine()) != null) sb.append(line).append("\n");
+      while ((line = bf.readLine()) != null) {
+        sb.append(line).append(NEW_LINE_CHAR);
+      }
       return sb.toString()
-          .replace("${COLUMNS}", renderCols(meta))
+          .replace(COLS_TPL_KEY, renderCols(meta))
           .replaceAll(ColumnType.LONG.name, ColumnType.BIGINT.name);
     } catch (IOException | MetadataException e) {
       e.printStackTrace();

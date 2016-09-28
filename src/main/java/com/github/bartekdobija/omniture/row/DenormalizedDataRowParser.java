@@ -6,6 +6,11 @@ import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * {@link RowParser} implementation which parses data logs into denormalized lines of data.
+ *
+ * @since 0.1
+ */
 public class DenormalizedDataRowParser implements RowParser {
 
   public static final char DEFAULT_ARRAY_SEPARATOR = ',';
