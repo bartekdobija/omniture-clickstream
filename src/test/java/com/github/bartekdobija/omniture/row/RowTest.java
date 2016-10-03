@@ -63,13 +63,13 @@ public class RowTest {
   @Test
   public void rowSerialization() throws IOException {
 
-    Row row = new Row(1);
+    Row row = new Row(2);
     row.add("string");
+    row.add(1);
 
     assertTrue(row instanceof Serializable);
-
     new ObjectOutputStream(new ByteArrayOutputStream()).writeObject(row);
-
+    assertEquals("string\t1\t", row.toString());
   }
 
 }

@@ -62,4 +62,14 @@ public class Row implements Iterable<Object>, Serializable, Cloneable {
       }
     };
   }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    for (Object o: columns) {
+      sb.append(o).append("\t");
+    }
+    return sb.toString();
+  }
+
 }
