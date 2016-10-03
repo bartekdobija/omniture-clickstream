@@ -10,7 +10,14 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+/**
+ * S3 backed {@link DataLoader} implementation.
+ * @since 0.1
+ */
 public class S3DataLoader implements DataLoader {
+
+  private static final String PROXY_HOST_KEY = "http.proxyHost";
+  private static final String PROXY_PORT_KEY = "http.proxyPort";
 
   private String source;
   private InputStream is;
@@ -23,8 +30,8 @@ public class S3DataLoader implements DataLoader {
 
   public S3DataLoader(String url) {
     this(url,
-         System.getProperty("http.proxyHost"),
-         System.getProperty("http.proxyPort")
+         System.getProperty(PROXY_HOST_KEY),
+         System.getProperty(PROXY_PORT_KEY)
     );
   }
 

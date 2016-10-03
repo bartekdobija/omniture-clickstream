@@ -9,6 +9,10 @@ import java.net.URISyntaxException;
 
 public class DataLoaderUtils {
 
+  private final static String EMTPY_STRING = "";
+  private final static String AMP_STRING = "@";
+  private final static String UH_STRING = "://";
+
   public static DataLoader getLoader(URI uri) throws ManifestException {
     return getLoader(uri.toString());
   }
@@ -38,14 +42,14 @@ public class DataLoaderUtils {
     }
     try {
       URI u = new URI(uri);
-      String auth = "";
+      String auth = EMTPY_STRING;
       String userInfo = u.getUserInfo();
 
       if (userInfo != null) {
-        auth = userInfo + "@";
+        auth = userInfo + AMP_STRING;
       }
 
-      return u.getScheme() + "://" + auth + u.getHost();
+      return u.getScheme() + UH_STRING + auth + u.getHost();
     } catch (URISyntaxException e) {
       e.printStackTrace();
       return null;

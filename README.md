@@ -1,5 +1,5 @@
 # omniture-clickstream
-Omniture clickstream log parser (alpha version)
+Omniture clickstream log parser (beta version)
 
 ### Configuration
 
@@ -14,7 +14,7 @@ Maven:
 <dependency>
   <groupId>com.github.bartekdobija</groupId>
   <artifactId>omniture-clickstream</artifactId>
-  <version>71deaff440</version>
+  <version>62f139c3f9</version>
 </dependency>
 ```
 
@@ -24,7 +24,7 @@ SBT:
 
 resolvers += "jitpack" at "https://jitpack.io"
 
-libraryDependencies += "com.github.bartekdobija" % "omniture-clickstream" % "71deaff440"
+libraryDependencies += "com.github.bartekdobija" % "omniture-clickstream" % "62f139c3f9"
 
 ```
 
@@ -38,7 +38,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.bartekdobija:omniture-clickstream:71deaff440'
+    compile 'com.github.bartekdobija:omniture-clickstream:62f139c3f9'
 }
 ```
 

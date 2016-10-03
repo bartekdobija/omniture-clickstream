@@ -6,6 +6,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 
+/**
+ * Representation of the Omniture manifest version.
+ *
+ * @since 0.1
+ */
 public class OmnitureManifest extends Manifest {
 
   private URI dataDirectory;
