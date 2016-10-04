@@ -21,13 +21,13 @@ public class DataLoaderUtils {
 
     try {
       String protocol = new URI(uri).getScheme();
-      if (protocol.equals(DataSchemes.LOCAL.value)) {
+      if (protocol == null || DataSchemes.LOCAL.value.equals(protocol)) {
         return new LocalFSDataLoader(uri);
-      } else if (protocol.equals(DataSchemes.S3A.value)
-          || protocol.equals(DataSchemes.S3N.value)
-          || protocol.equals(DataSchemes.S3.value) ) {
+      } else if (DataSchemes.S3A.value.equals(protocol)
+          || DataSchemes.S3N.value.equals(protocol)
+          || DataSchemes.S3.value.equals(protocol) ) {
         return new S3DataLoader(uri);
-      } else if (protocol.equals(DataSchemes.HDFS.value)) {
+      } else if (DataSchemes.HDFS.value.equals(protocol)) {
         return new HDFSDataLoader(uri);
       }
     } catch (DataLoaderException | URISyntaxException e) {

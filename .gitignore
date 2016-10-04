@@ -12,6 +12,7 @@ build/
 src/test/resources/data/parquet/*
 src/test/resources/data/avro/*
 src/test/resources/output/
+src/test/resources/data/prod/
 *.iml
 *.ipr
 *.iws
