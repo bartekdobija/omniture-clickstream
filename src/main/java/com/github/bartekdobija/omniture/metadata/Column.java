@@ -2,6 +2,9 @@ package com.github.bartekdobija.omniture.metadata;
 
 import java.io.Serializable;
 
+/**
+ * Column definition.
+ */
 public class Column implements Serializable {
 
   private String name;

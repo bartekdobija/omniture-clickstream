@@ -1,5 +1,4 @@
 /**
- * This package contains utils and convenience methods for metadata extraction
- * from Omniture manifests.
+ * Utils and convenience methods for Omniture manifest metadata extraction.
  */
 package com.github.bartekdobija.omniture.metadata.utils;

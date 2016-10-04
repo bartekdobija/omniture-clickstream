@@ -14,7 +14,7 @@ Maven:
 <dependency>
   <groupId>com.github.bartekdobija</groupId>
   <artifactId>omniture-clickstream</artifactId>
-  <version>62f139c3f9</version>
+  <version>10b9161753</version>
 </dependency>
 ```
 
@@ -24,7 +24,7 @@ SBT:
 
 resolvers += "jitpack" at "https://jitpack.io"
 
-libraryDependencies += "com.github.bartekdobija" % "omniture-clickstream" % "62f139c3f9"
+libraryDependencies += "com.github.bartekdobija" % "omniture-clickstream" % "10b9161753"
 
 ```
 
@@ -38,7 +38,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.bartekdobija:omniture-clickstream:62f139c3f9'
+    compile 'com.github.bartekdobija:omniture-clickstream:10b9161753'
 }
 ```
 
@@ -48,7 +48,7 @@ Java - metadata load from the Omniture manifest file
 
 ```java
 String localManifest = "file://omniture_manifest.txt";
-String hdfsManifest = "hdfs://hadoopnode/omniture_manifest.txt";
+String hdfsManifest = "hdfs://namenode/omniture_manifest.txt";
 String s3Manifest = "s3://my-omniture/manifest_a.txt,s3://my-omniture/manifest_b.txt";
 String row = "a\tb\tc";
 

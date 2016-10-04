@@ -1,5 +1,8 @@
 package com.github.bartekdobija.omniture.metadata;
 
+/**
+ * Objects of this class represent log data files listed in the {@link com.github.bartekdobija.omniture.manifest.OmnitureManifest}s
+ */
 public class DataFile {
 
   private String name;

@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * {@link OmnitureManifest} related convenience methods.
+ *
  * @since 0.1
  */
 public class ManifestUtils {

@@ -11,6 +11,9 @@ import org.junit.Test;
 
 import java.util.List;
 
+/**
+ * This test demonstrates a sample API use case.
+ */
 public class SampleUseCaseTest {
 
   private static final String LIST_SEPARATOR = ",";

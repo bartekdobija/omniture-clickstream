@@ -3,6 +3,9 @@ package com.github.bartekdobija.omniture.metadata;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Instance of this class stores lookup tables' data.
+ */
 public class LookupTableIndex extends HashMap<String, String> {
 
   public transient static final char GROUP_SEPARATOR = ':';

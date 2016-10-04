@@ -2,15 +2,24 @@ package com.github.bartekdobija.omniture.metadata;
 
 import java.util.List;
 
+/**
+ * Representation of the Omniture metadata loaded from manifest files.
+ */
 public class OmnitureMetadata {
 
   private Header header;
   private LookupTable lookupTable;
   private List<DataFile> dataFiles;
 
-  public OmnitureMetadata() {
-  }
+  public OmnitureMetadata() {}
 
+  /**
+   *
+   *
+   * @param header log header data
+   * @param lookup lookup tables' instance
+   * @param data a list of data files' metadata
+   */
   public OmnitureMetadata(Header header, LookupTable lookup, List<DataFile> data) {
     this.header = header;
     this.lookupTable = lookup;

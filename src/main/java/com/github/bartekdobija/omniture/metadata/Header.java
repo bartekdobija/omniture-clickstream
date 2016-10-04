@@ -8,6 +8,9 @@ import com.github.bartekdobija.omniture.metadata.utils.MetadataUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Instance of this class represents log header information.
+ */
 public class Header {
 
   public static final String DEFAULT_HEADER_FILE = "column_headers.tsv";

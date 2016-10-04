@@ -2,6 +2,9 @@ package com.github.bartekdobija.omniture.row;
 
 import java.io.Serializable;
 
+/**
+ * Row parser statistics.
+ */
 public class RowParserStats implements Serializable {
 
   private long parsedCount;

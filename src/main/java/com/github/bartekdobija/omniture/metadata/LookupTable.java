@@ -6,6 +6,9 @@ import com.github.bartekdobija.omniture.metadata.utils.MetadataUtils;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Lookup table instance shipped as part of the omniture log export.
+ */
 public class LookupTable {
 
   public static final String[] REGISTERED_LOOKUP_TABLES = {

@@ -1,4 +1,4 @@
 /**
- * This package contains class for data loading.
+ * Remote data loading classes.
  */
 package com.github.bartekdobija.omniture.loader;

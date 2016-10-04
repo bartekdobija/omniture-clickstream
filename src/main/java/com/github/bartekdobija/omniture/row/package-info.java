@@ -1,4 +1,4 @@
 /**
- * This package contains classes for Omniture row parsing.
+ * Omniture row parsing classes.
  */
 package com.github.bartekdobija.omniture.row;

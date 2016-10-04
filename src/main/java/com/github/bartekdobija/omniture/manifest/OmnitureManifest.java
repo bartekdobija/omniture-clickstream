@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.net.URI;
 
 /**
- * Representation of the Omniture manifest version.
+ * Representation of the Omniture manifest file.
  *
  * @since 0.1
  */

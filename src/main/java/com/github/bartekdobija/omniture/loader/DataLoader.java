@@ -4,7 +4,8 @@ import java.io.Closeable;
 import java.io.InputStream;
 
 /**
- * Data loader interface provided for metadata and log loading operation.
+ * Data loader interface provided for lookup and log metadata operations.
+ *
  * @since 0.1
  */
 public interface DataLoader extends Closeable {

@@ -5,6 +5,9 @@ import com.github.bartekdobija.omniture.metadata.ColumnType;
 
 import java.util.regex.Pattern;
 
+/**
+ * Name based {@link Column} type resolution.
+ */
 public class SimpleColumnTypeResolver implements ColumnTypeResolver {
 
   protected Pattern _string = Pattern.compile("evar|prop");
@@ -24,6 +27,12 @@ public class SimpleColumnTypeResolver implements ColumnTypeResolver {
   protected Pattern _double = Pattern.compile("_rate");
   protected String _timestamp = "_gmt";
 
+  /**
+   * Interpret column name into a fully configured {@link Column} object.
+   *
+   * @param name column name
+   * @return column object with type and lookup table configuration
+   */
   @Override
   public Column parseName(String name) {
 
