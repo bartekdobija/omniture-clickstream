@@ -7,7 +7,7 @@ Omniture manifest file loading and parsing, including lookup data and column typ
 The implementation is able to read all data from several popular data sources, 
 including Amazon S3, Hadoop/HDFS, and local file systems.
 
-Internally, the Amazon S3 implementation uses [AWSCredentialsProviderChain](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/AWSCredentialsProviderChain.html) 
+Internally, the Amazon S3 [DataSource](https://github.com/bartekdobija/omniture-clickstream/blob/master/src/main/java/com/github/bartekdobija/omniture/loader/S3DataLoader.java) implementation uses [AWSCredentialsProviderChain](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/AWSCredentialsProviderChain.html) 
 with [SystemPropertiesCredentialsProvider](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/SystemPropertiesCredentialsProvider.html),
  [EnvironmentVariableCredentialsProvider](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/EnvironmentVariableCredentialsProvider.html) and 
  [InstanceProfileCredentialsProvider](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/InstanceProfileCredentialsProvider.html)
