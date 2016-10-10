@@ -10,7 +10,7 @@ including Amazon S3, Hadoop/HDFS, and local file systems.
 Internally, the Amazon S3 [DataSource](https://github.com/bartekdobija/omniture-clickstream/blob/master/src/main/java/com/github/bartekdobija/omniture/loader/S3DataLoader.java) implementation uses [AWSCredentialsProviderChain](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/AWSCredentialsProviderChain.html) 
 with [SystemPropertiesCredentialsProvider](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/SystemPropertiesCredentialsProvider.html),
  [EnvironmentVariableCredentialsProvider](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/EnvironmentVariableCredentialsProvider.html) and 
- [InstanceProfileCredentialsProvider](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/InstanceProfileCredentialsProvider.html)
+ [InstanceProfileCredentialsProvider](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/InstanceProfileCredentialsProvider.html).
 
 The library has been tested in Java and Scala applications.
 
@@ -27,7 +27,7 @@ Maven:
 <dependency>
   <groupId>com.github.bartekdobija</groupId>
   <artifactId>omniture-clickstream</artifactId>
-  <version>10b9161753</version>
+  <version>65002e3321</version>
 </dependency>
 ```
 
@@ -37,7 +37,7 @@ SBT:
 
 resolvers += "jitpack" at "https://jitpack.io"
 
-libraryDependencies += "com.github.bartekdobija" % "omniture-clickstream" % "10b9161753"
+libraryDependencies += "com.github.bartekdobija" % "omniture-clickstream" % "65002e3321"
 
 ```
 
@@ -51,7 +51,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.bartekdobija:omniture-clickstream:10b9161753'
+    compile 'com.github.bartekdobija:omniture-clickstream:65002e3321'
 }
 ```
 
