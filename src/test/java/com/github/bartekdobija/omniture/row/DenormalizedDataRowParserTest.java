@@ -22,6 +22,8 @@ public class DenormalizedDataRowParserTest {
   private static final String INVALID_TYPE_ROW =
       "\t6\tstring\tstring\tstring\tstring\tstring\tstring\t6" +
           "\tstring\tx\ty\tstring";
+  private static final String INVALID_TYPE_ROW2 =
+      ",,\t,,\t,,\t,,\t,,\t,,\t,,\t,,\t,,\t,,\t,,\t,,\t,,\t,,\t";
 
   private static final String LOWER_COLUMN_NO = "\ttest\t666";
   private static final String HIGHER_COLUMN_NO = "\ttest\t666\t12.5\t34\tasda";
@@ -207,6 +209,40 @@ public class DenormalizedDataRowParserTest {
     assertEquals(10, stats.getExceptionCount());
 
     row = parser.parse(INVALID_TYPE_ROW);
+
+  }
+
+  @Test
+  public void emptyStringArray() throws RowParserException {
+    RowParser parser = DenormalizedDataRowParser.newInstance(
+        VALID_ROW_SCHEMA,
+        new LookupTableIndex()
+    );
+
+    Row row = parser.parse(INVALID_TYPE_ROW2);
+
+    assertEquals(",,", row.get(0));
+    assertEquals(",,",  row.get(1));
+    assertEquals(null, row.get(2));
+    assertEquals(null, row.get(3));
+    assertEquals(null, row.get(4));
+    assertEquals(null, row.get(5));
+    assertEquals(null, row.get(6));
+    assertEquals(null, row.get(7));
+    assertEquals(null, row.get(9));
+    assertEquals(null, row.get(10));
+    assertEquals(null, row.get(11));
+    assertEquals(null, row.get(12));
+    assertEquals(null, row.get(13));
+
+    RowParserStats stats = parser.getRowParserStats();
+
+    assertEquals(1, stats.getParsedCount());
+    assertEquals(0, stats.getEmptyRowCount());
+    assertEquals(2, stats.getEmptyColumnCount());
+    assertEquals(11, stats.getExceptionCount());
+
+    row = parser.parse(INVALID_TYPE_ROW2);
 
   }
 
