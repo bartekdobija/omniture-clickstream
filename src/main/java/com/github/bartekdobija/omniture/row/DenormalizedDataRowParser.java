@@ -262,7 +262,7 @@ public class DenormalizedDataRowParser implements RowParser {
   }
 
   private String[] asStrings(char[] data, int start, int end, String group) {
-    int[] sepPos = new int[end - start];
+    int[] sepPos = new int[(end - start) + 1];
     int i, arrSize;
     for (i = start, arrSize = 0; i < end; i++) {
       if (data[i] == arraySeparator) {
