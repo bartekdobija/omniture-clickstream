@@ -1,8 +1,7 @@
 # omniture-clickstream
-High level API for [Omniture Clickstream Data Feeds](https://marketing.adobe.com/resources/help/en_US/sc/clickstream/) metadata and log parsing.
+High level API for [Adobe Analytics Clickstream Data Feeds](https://marketing.adobe.com/resources/help/en_US/sc/clickstream/) metadata and log parsing.
 
-The library provides an Omniture log parser and several convenience methods for 
-Omniture manifest file loading and parsing, including lookup data and column type resolution.  
+The library provides a log parser and several convenience methods for manifest file loading and parsing, including lookup data and column type resolution.
 
 The implementation is able to read all data from several popular data sources, 
 including Amazon S3, Hadoop/HDFS, and local file systems.
