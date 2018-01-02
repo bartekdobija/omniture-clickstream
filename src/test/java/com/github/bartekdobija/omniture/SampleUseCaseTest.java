@@ -1,9 +1,8 @@
 package com.github.bartekdobija.omniture;
 
 
-import com.github.bartekdobija.omniture.metadata.MetadataException;
-import com.github.bartekdobija.omniture.metadata.OmnitureMetadata;
-import com.github.bartekdobija.omniture.metadata.OmnitureMetadataFactory;
+import com.github.bartekdobija.omniture.metadata.*;
+
 import static org.junit.Assert.*;
 
 import com.github.bartekdobija.omniture.row.*;
@@ -25,9 +24,9 @@ public class SampleUseCaseTest {
   private static final String MANIFEST_LIST =
       SampleUseCaseTest.class.
           getResource("/data/suiteid_2015-02-10.txt").toString()
-      + LIST_SEPARATOR +
-      SampleUseCaseTest.class.
-          getResource("/data/suiteid_2015-12-29.txt").toString();
+          + LIST_SEPARATOR +
+          SampleUseCaseTest.class.
+              getResource("/data/suiteid_2015-12-29.txt").toString();
 
   private static final String ROW_STRING = "a\tb\tc";
 
@@ -37,6 +36,21 @@ public class SampleUseCaseTest {
 
     OmnitureMetadata metadata =
         new OmnitureMetadataFactory().create(MANIFEST_FILE);
+
+    // access to the lookup data file
+    LookupTable lookup = metadata.getLookupTable();
+    String lookupFile = lookup.getLoader().getSource();
+
+    assertTrue(lookupFile.contains("lookup_data.tar.gz"));
+
+    // optional lookup data extraction using a key-value index
+    LookupTableIndex index = metadata.getLookupTable().getIndex();
+
+    assertNotNull(index);
+    assertEquals("Chrome 39.0.1955",
+        index.getGroupValue("browser","2238744955"));
+
+
     RowParser parser = DenormalizedDataRowParser.newInstance(metadata);
     Row row = parser.parse(ROW_STRING);
 
